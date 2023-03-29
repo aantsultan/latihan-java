@@ -1,0 +1,53 @@
+plugins {
+	id 'org.springframework.boot' version "${springBootVersion}"
+	id 'io.spring.dependency-management' version "${springDepedencyManagement}"
+	id 'java'
+}
+
+group = projectGroup
+version = projectVersion
+sourceCompatibility = javaVersion
+
+allprojects{
+	apply plugin: 'java'
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		compileOnly 'org.projectlombok:lombok:' + lombokVersion
+		annotationProcessor 'org.projectlombok:lombok:' + lombokVersion
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+		testImplementation 'org.springframework.boot:spring-boot-starter-test:' + springBootVersion
+	}
+	tasks.named('test') {
+		useJUnitPlatform()
+	}
+}
+
+project ('latihan-java-database') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+	}
+}
+
+project ('latihan-java-internationalization') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+	}
+}
+
+project ('latihan-java-spring-dasar') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'com.google.code.gson:gson:' + gsonVersion
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
