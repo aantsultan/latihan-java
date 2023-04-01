@@ -46,6 +46,13 @@ project ('latihan-java-spring-dasar') {
 	}
 }
 
+project ('latihan-java-logic') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+	}
+}
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor

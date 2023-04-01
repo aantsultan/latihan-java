@@ -3,5 +3,6 @@ rootProject.name = 'latihan-java'
 include 'latihan-java-database'
 include 'latihan-java-internationalization'
 include 'latihan-java-spring-dasar'
+include 'latihan-java-logic'
 
 include 'common'
