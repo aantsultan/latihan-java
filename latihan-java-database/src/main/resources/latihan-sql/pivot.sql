@@ -13,7 +13,7 @@
 -- Priya        | Singer
 
 ------ OUTPUT -------
--- DOCTOR   | PROFESSOR     | SINGLE    | ACTOR
+-- DOCTOR   | PROFESSOR     | SINGER    | ACTOR
 ------------|---------------|-----------|-------
 -- Jenny    | Ashley        | Meera     | Jane
 -- Samantha | Christeen     | Priya     | Julia
