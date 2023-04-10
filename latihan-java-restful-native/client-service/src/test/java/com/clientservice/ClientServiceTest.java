@@ -57,8 +57,8 @@ public class ClientServiceTest {
                         inputLine = bufferedReader.readLine();
                     }
                     bufferedReader.close();
-                    String result = response.toString();
-                    return countQuantity(result) + doRestfulAPI_V2(page + 1, total, countData(result));
+                    int[] result = countQuantityAndData(response.toString());
+                    return result[0] + doRestfulAPI_V2(page + 1, total, result[1]);
 
                 } else {
                     throw new IOException("CONNECTION ERROR");
@@ -69,33 +69,24 @@ public class ClientServiceTest {
         }
     }
 
-    static int countData(String input) {
+    static int[] countQuantityAndData(String input) {
         try {
             ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
             Bindings bindings = engine.getContext().getBindings(ScriptContext.GLOBAL_SCOPE);
             bindings.put("input", input);
-            return (Integer) engine.eval(
-                    "JSON.parse('" + input + "').data.product.length");
-        } catch (ScriptException | ClassCastException se) {
-            throw new RuntimeException("ERROR COUNT_DATE");
-        }
-    }
+            int[] count = (int[]) engine.eval("" +
+                    "var json = JSON.parse('" + input + "');" +
+                    "var sum = 0;" +
+                    "var lengthData = json.data.length;" +
+                    "json.data.product.forEach(function(item){" +
+                    "   sum += item.productQuantity" +
+                    "});" +
+                    "var result = Java.to([sum,lengthData], \"int[]\");" +
+                    "result;");
 
-    static int countQuantity(String input) {
-        try {
-            ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
-            Bindings bindings = engine.getContext().getBindings(ScriptContext.GLOBAL_SCOPE);
-            bindings.put("input", input);
-            int page = (Integer) engine.eval(
-                    "JSON.parse('" + input + "').data.product.length");
-            int count = 0;
-            for (int i = 0; i < page; i++) {
-                count += (Integer) engine.eval(
-                        "JSON.parse('" + input + "').data.product[" + i + "].productQuantity");
-            }
             return count;
         } catch (ScriptException | ClassCastException se) {
-            throw new RuntimeException("ERROR COUNT_QUANTITY");
+            throw new RuntimeException("ERROR COUNT_QUANTITY_DATA");
         }
     }
 }
