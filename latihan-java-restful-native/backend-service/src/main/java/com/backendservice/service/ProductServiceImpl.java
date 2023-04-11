@@ -2,6 +2,7 @@ package com.backendservice.service;
 
 import com.backendservice.dto.ProductResponseDto;
 import com.backendservice.entity.ProductEntity;
+import com.backendservice.mapper.ProductResponseMapper;
 import com.backendservice.repository.ProductRepository;
 import com.common.util.dto.CommonResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,25 +12,27 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductRepository repository;
 
+    @Autowired
+    private ProductResponseMapper productResponseMapper;
+
     @Override
     public ResponseEntity<CommonResponseDto> retrieveAllProduct(Integer page, Integer total) {
         Page<ProductEntity> productEntities = repository.getAllProduct(PageRequest.of(page, total));
-        List<ProductEntity> productEntityList = productEntities.toList();
-        List<ProductResponseDto> productResponseDtoList = new ArrayList<>();
-        for(ProductEntity entity : productEntityList){
-            productResponseDtoList.add(new ProductResponseDto(entity.getProductName(), entity.getProductQuantity(), entity.getProductAmount()));
-        }
+        List<ProductResponseDto> productResponseDtoList =
+                productEntities.stream()
+                        .map(productResponseMapper)
+                        .collect(Collectors.toList());
+
         long productSize = repository.count();
         LinkedHashMap<String, Object> response = new LinkedHashMap<>();
         response.put("product", productResponseDtoList);
