@@ -19,9 +19,6 @@ allprojects{
 		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
 		testImplementation 'org.springframework.boot:spring-boot-starter-test:' + springBootVersion
 	}
-	tasks.named('test') {
-		useJUnitPlatform()
-	}
 }
 
 project ('latihan-java-database') {
@@ -69,6 +66,19 @@ project ('latihan-java-restful-native:client-service') {
 	dependencies {
 		implementation project(':common')
 		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+	}
+}
+
+project ('latihan-java-spring-session'){
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation 'org.springframework.boot:spring-boot-starter-security:' + springSessionVersion
+		implementation 'javax.xml.bind:jaxb-api:' + jabXmlVersion
+		implementation 'org.springframework.boot:spring-boot-starter-data-redis:' + springDataRedisVersion
+		implementation 'org.springframework.session:spring-session-data-redis:' + springSessionDataRedisVersion
+		implementation 'com.github.kstyrc:embedded-redis:' + embeddedRedisVersion
+		implementation 'redis.clients:jedis:' + redisClientsVersion + '@jar'
+		testImplementation 'org.junit.platform:junit-platform-runner:1.9.1'
 	}
 }
 
