@@ -8,5 +8,6 @@ include 'latihan-java-reflection'
 include 'latihan-java-restful-native:backend-service'
 include 'latihan-java-restful-native:client-service'
 include 'latihan-java-spring-session'
+include 'latihan-java-spring-jpa-datatable'
 
 include 'common'

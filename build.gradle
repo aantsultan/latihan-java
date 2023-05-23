@@ -82,6 +82,18 @@ project ('latihan-java-spring-session'){
 	}
 }
 
+project ('latihan-java-spring-jpa-datatable') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa:' + springDataJpaVersion
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+		implementation 'com.microsoft.sqlserver:mssql-jdbc:' + sqlJdbcVersion
+		implementation 'javax.xml.bind:jaxb-api:' + jabXmlVersion
+		implementation 'com.github.darrachequesne:spring-data-jpa-datatables:' + springJpaDataTablesVersion
+	}
+}
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
