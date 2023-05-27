@@ -5,7 +5,6 @@ import com.latihan.jpa.datatable.service.StockTransferService;
 import com.latihan.jpa.datatable.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
