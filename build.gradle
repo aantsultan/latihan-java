@@ -94,6 +94,15 @@ project ('latihan-java-spring-jpa-datatable') {
 	}
 }
 
+project ('latihan-java-spring-oauth2') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		compileOnly 'org.projectlombok:lombok:' + lombokVersion
+		annotationProcessor 'org.projectlombok:lombok:' + lombokVersion
+	}
+}
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
