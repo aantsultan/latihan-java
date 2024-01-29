@@ -1,0 +1,24 @@
+rootProject.name = 'latihan-java'
+
+include 'latihan-java-database' //port 10000
+include 'latihan-java-internationalization' //port 10001
+include 'latihan-java-spring-dasar'
+include 'latihan-java-logic'
+include 'latihan-java-reflection'
+include 'latihan-java-restful-native:backend-service' //port 8200
+include 'latihan-java-restful-native:client-service' //port 8201
+include 'latihan-java-spring-session' //port 6379
+include 'latihan-java-spring-jpa-datatable' //port 8201
+include 'latihan-java-spring-oauth2' //port 8202
+include 'latihan-java-jms-activemq-artemis'
+include 'latihan-java-spring-mongodb'
+include 'latihan-java-atomikos'
+include 'latihan-java-multiple-database'
+include 'latihan-java-spring-aop'
+include 'latihan-java-spring-design-pattern'
+include 'latihan-java-logging'
+include 'latihan-java-spring-data-redis'
+include 'latihan-java-apache-ignite'
+include 'latihan-java-spring-apache-ignite'
+
+include 'common'

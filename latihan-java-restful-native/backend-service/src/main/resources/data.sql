@@ -1,0 +1,10 @@
+INSERT INTO product(product_id, product_name, product_quantity, product_amount) VALUES (1, 'Asus Zenfone 6', 10, 6999000);
+INSERT INTO product(product_id, product_name, product_quantity, product_amount) VALUES (2, 'Asus Zenfone Max Pro M1', 2, 2999000);
+INSERT INTO product(product_id, product_name, product_quantity, product_amount) VALUES (3, 'Apple IPhone X', 5, 12999000);
+INSERT INTO product(product_id, product_name, product_quantity, product_amount) VALUES (4, 'Samsung Note', 20, 10000000);
+INSERT INTO product(product_id, product_name, product_quantity, product_amount) VALUES (5, 'Asus ROG Phone', 13, 8000000);
+INSERT INTO product(product_id, product_name, product_quantity, product_amount) VALUES (6, 'POCO Phone F4', 40, 5999000);
+INSERT INTO product(product_id, product_name, product_quantity, product_amount) VALUES (7, 'Samsung Galaxy A2s', 2, 5999000);
+INSERT INTO product(product_id, product_name, product_quantity, product_amount) VALUES (8, 'Samsung Galaxy A10', 30, 1500000);
+INSERT INTO product(product_id, product_name, product_quantity, product_amount) VALUES (9, 'Redmi Note 5', 10, 7999000);
+INSERT INTO product(product_id, product_name, product_quantity, product_amount) VALUES (10, 'Apple IPhone 7', 1, 3999000);

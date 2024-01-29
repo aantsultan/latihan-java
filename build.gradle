@@ -1,0 +1,217 @@
+plugins {
+	id 'org.springframework.boot' version "${springBootVersion}"
+	id 'io.spring.dependency-management' version "${springDepedencyManagement}"
+	id 'java'
+}
+
+group = projectGroup
+version = projectVersion
+sourceCompatibility = javaVersion
+
+allprojects{
+	apply plugin: 'java'
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		compileOnly 'org.projectlombok:lombok:' + lombokVersion
+		annotationProcessor 'org.projectlombok:lombok:' + lombokVersion
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+		testImplementation 'org.springframework.boot:spring-boot-starter-test:' + springBootVersion
+	}
+
+	test {
+		useJUnitPlatform()
+	}
+}
+
+project ('latihan-java-database') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa:' + springDataJpaVersion
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+		runtimeOnly 'com.h2database:h2:' + h2DatabaseVersion
+	}
+}
+
+project ('latihan-java-internationalization') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+	}
+}
+
+project ('latihan-java-spring-dasar') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'com.google.code.gson:gson:' + gsonVersion
+	}
+}
+
+project ('latihan-java-logic') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+	}
+}
+
+project ('latihan-java-restful-native:backend-service') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa:' + springDataJpaVersion
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+		runtimeOnly 'com.h2database:h2:' + h2DatabaseVersion
+		implementation 'javax.xml.bind:jaxb-api:' + jabXmlVersion
+	}
+}
+
+project ('latihan-java-restful-native:client-service') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+	}
+}
+
+project ('latihan-java-spring-session'){
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation 'org.springframework.boot:spring-boot-starter-security:' + springSessionVersion
+		implementation 'javax.xml.bind:jaxb-api:' + jabXmlVersion
+		implementation 'org.springframework.boot:spring-boot-starter-data-redis:' + springDataRedisVersion
+		implementation 'org.springframework.session:spring-session-data-redis:' + springSessionDataRedisVersion
+		implementation 'com.github.kstyrc:embedded-redis:' + embeddedRedisVersion
+		implementation 'redis.clients:jedis:' + redisClientsVersion + '@jar'
+		testImplementation 'org.junit.platform:junit-platform-runner:1.9.1'
+	}
+}
+
+project ('latihan-java-spring-jpa-datatable') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa:' + springDataJpaVersion
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+		implementation 'com.microsoft.sqlserver:mssql-jdbc:' + sqlJdbcVersion
+		implementation 'javax.xml.bind:jaxb-api:' + jabXmlVersion
+		implementation 'com.github.darrachequesne:spring-data-jpa-datatables:' + springJpaDataTablesVersion
+	}
+}
+
+project ('latihan-java-spring-oauth2') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		compileOnly 'org.projectlombok:lombok:' + lombokVersion
+		annotationProcessor 'org.projectlombok:lombok:' + lombokVersion
+	}
+}
+
+project ('latihan-java-jms-activemq-artemis') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		// https://mvnrepository.com/artifact/org.apache.activemq/artemis-jms-client-all
+		implementation 'org.apache.activemq:artemis-jms-client-all:' + apacheActiveMqArtemisVersion
+
+	}
+}
+
+project ('latihan-java-spring-mongodb') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+		implementation 'org.springframework.boot:spring-boot-starter-data-mongodb:' + springDataMongoDBVersion
+	}
+}
+
+project ('latihan-java-atomikos') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa:' + springDataJpaVersion
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+		implementation 'com.microsoft.sqlserver:mssql-jdbc:' + sqlJdbcVersion
+		implementation 'org.postgresql:postgresql:' + postgresqlJdbcVersion
+		implementation 'com.atomikos:transactions-jdbc:' + atomikosJdbcVersion
+		implementation 'com.atomikos:transactions-jms:' + atomikosJmsVersion
+	}
+}
+
+project ('latihan-java-multiple-database') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa:' + springDataJpaVersion
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+		implementation 'com.microsoft.sqlserver:mssql-jdbc:' + sqlJdbcVersion
+		implementation 'org.postgresql:postgresql:' + postgresqlJdbcVersion
+	}
+}
+
+project ('latihan-java-spring-aop') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-aop:' + springAopVersion
+	}
+}
+
+project ('latihan-java-spring-design-pattern') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+	}
+}
+
+project ('latihan-java-logging') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+	}
+}
+
+project ('latihan-java-spring-data-redis') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+		implementation 'org.springframework.boot:spring-boot-starter-data-redis:' + springDataRedisVersion
+		implementation 'redis.clients:jedis:'+ redisClientsVersion +'@jar'
+		implementation 'org.apache.commons:commons-pool2:' + commonPoolVersion
+		implementation project(':common')
+	}
+}
+
+project ('latihan-java-apache-ignite') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+		implementation 'org.apache.ignite:ignite-core:' + igniteCoreVersion
+		implementation 'org.apache.ignite:ignite-spring:' + igniteSpringVersion
+		implementation project(':common')
+	}
+}
+
+project ('latihan-java-spring-apache-ignite') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+		implementation 'org.springframework.data:spring-data-commons:' + springDataCommonsVersion
+		implementation 'org.springframework:spring-tx:' + springTxVersion
+		implementation 'org.apache.ignite:ignite-core:' + igniteCoreVersion
+		implementation 'org.apache.ignite:ignite-indexing:' + igniteIndexingVersion
+		implementation 'org.apache.ignite:ignite-spring-boot-autoconfigure-ext:' + igniteSpringBootAutoconfigureExtVersion
+		implementation 'org.apache.ignite:ignite-spring-data-ext:' + igniteSpringDataExtVersion
+		implementation project(':common')
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
