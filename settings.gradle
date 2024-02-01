@@ -20,5 +20,8 @@ include 'latihan-java-logging'
 include 'latihan-java-spring-data-redis'
 include 'latihan-java-apache-ignite'
 include 'latihan-java-spring-apache-ignite'
+include 'latihan-java-spring-rabbitmq:consumer-app'
+include 'latihan-java-spring-rabbitmq:producer-app'
+include 'latihan-java-rabbitmq'
 
 include 'common'

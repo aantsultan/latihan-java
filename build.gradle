@@ -1,6 +1,6 @@
 plugins {
 	id 'org.springframework.boot' version "${springBootVersion}"
-	id 'io.spring.dependency-management' version "${springDepedencyManagement}"
+	id 'io.spring.dependency-management' version "${springDependencyManagement}"
 	id 'java'
 }
 
@@ -207,6 +207,37 @@ project ('latihan-java-spring-apache-ignite') {
 		implementation 'org.apache.ignite:ignite-spring-boot-autoconfigure-ext:' + igniteSpringBootAutoconfigureExtVersion
 		implementation 'org.apache.ignite:ignite-spring-data-ext:' + igniteSpringDataExtVersion
 		implementation project(':common')
+	}
+}
+
+project ('latihan-java-spring-rabbitmq:consumer-app') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-amqp
+		implementation 'org.springframework.boot:spring-boot-starter-amqp:' + springBootRabbitMQVersion
+//		implementation 'org.springframework:spring-websocket:' + springWebSocketVersion
+//		implementation 'org.springframework:spring-messaging:' + springMessagingVersion
+		implementation 'org.springframework.boot:spring-boot-starter-webflux:' + springBootWebFluxVersion
+		implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:' + springThymeleafVersion
+		developmentOnly 'org.springframework.boot:spring-boot-devtools:' + springBootVersion
+	}
+}
+
+project ('latihan-java-spring-rabbitmq:producer-app') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+		implementation 'org.springframework.boot:spring-boot-starter-amqp:' + springBootRabbitMQVersion
+	}
+}
+
+project ('latihan-java-rabbitmq') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-amqp:' + springBootRabbitMQVersion
 	}
 }
 
