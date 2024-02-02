@@ -1,0 +1,91 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Closing Period</title>
+    <style>
+        #myProgress {
+            width: 100%;
+            background-color: #ddd;
+        }
+
+        #myBar {
+            width: 0;
+            height: 30px;
+            background-color: #04AA6D;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<h1>CLOSING PERIOD</h1>
+<a th:href="@{/}">Closing Period</a>
+<div id="myProgress">
+    <div id="myBar">0%</div>
+</div>
+<button id="open" onclick="onOpen()">closing</button>
+<p id="result"></p>
+<script>
+    'use strict';
+
+    const url = "[[@{/closing-period/close}]]";
+    let eventSource = null;
+    const SSE_NAME = "closing-period";
+    const SSE_CLOSE = "close";
+
+
+    function onOpen() {
+        const status = "CLOSE";
+        eventSource = new EventSource(`${url}/${status}`);
+        console.log("connection opening ...")
+        eventSource.addEventListener("open", function (event) {
+            console.log("connection opened");
+        })
+        onMessage();
+    }
+
+    function onClose() {
+        if (eventSource) {
+            console.info("connection closing ...");
+            eventSource.close();
+            console.info("connection closed");
+        }
+    }
+
+    function onMessage() {
+        eventSource.addEventListener(SSE_NAME, function (event) {
+            let result = event.data;
+            if (result === SSE_CLOSE) {
+                onClose();
+            } else {
+                const dto = JSON.parse(result);
+                const currentData = dto.currentData;
+                const totalData = dto.totalData;
+                const elementLi = document.createElement("span");
+                elementLi.textContent = `${currentData} of ${totalData}`;
+                document.getElementById("result").innerHTML = '';
+                document.getElementById("result").appendChild(elementLi);
+                move(currentData, totalData);
+            }
+        })
+
+        eventSource.onerror = (err) => {
+            console.error("error : ", err);
+            eventSource.close();
+        }
+    }
+
+    function move(currentData, totalData) {
+        let elem = document.getElementById("myBar");
+        let width = Math.floor((currentData/totalData) * 100);
+        elem.style.width = width + "%";
+        elem.innerHTML = width  + "%";
+    }
+</script>
+</body>
+</html>

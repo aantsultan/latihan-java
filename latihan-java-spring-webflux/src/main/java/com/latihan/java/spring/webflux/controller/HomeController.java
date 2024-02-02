@@ -3,6 +3,7 @@ package com.latihan.java.spring.webflux.controller;
 import com.latihan.java.spring.webflux.service.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -32,6 +33,11 @@ public class HomeController {
     @GetMapping(value = "/stream-sse-mvc", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public SseEmitter streamSseMvc() {
         return service.getAllDataSse();
+    }
+
+    @GetMapping(value = "/stream-sse-flux", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<ServerSentEvent<String>> streamSseFlux() {
+        return service.getAllDataSseFlux();
     }
 
 }

@@ -3,6 +3,7 @@ package com.latihan.java.spring.webflux.service;
 import com.latihan.java.spring.webflux.constant.SSEConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import reactor.core.publisher.Flux;
@@ -56,5 +57,25 @@ public class HomeServiceImpl implements HomeService {
             }
         });
         return emitter;
+    }
+
+    @Override
+    public Flux<ServerSentEvent<String>> getAllDataSseFlux() {
+        // process is running
+        Flux<ServerSentEvent<String>> result = Flux.interval(Duration.ofSeconds(1))
+                .map(data -> ServerSentEvent.<String>builder()
+                        .id(String.valueOf(data))
+                        .event(SSEConstant.SSE_NAME)
+                        .data("SSE - " + LocalTime.now())
+                        .build());
+
+        // if process is done
+        result = result.map(data -> ServerSentEvent.<String>builder()
+                .id(String.valueOf(data))
+                .event(SSEConstant.SSE_NAME)
+                .data(SSEConstant.CLOSE)
+                .build());
+
+        return result;
     }
 }
