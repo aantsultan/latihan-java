@@ -23,5 +23,6 @@ include 'latihan-java-spring-apache-ignite'
 include 'latihan-java-spring-rabbitmq:consumer-app'
 include 'latihan-java-spring-rabbitmq:producer-app'
 include 'latihan-java-rabbitmq'
+include 'latihan-java-spring-webflux'
 
 include 'common'

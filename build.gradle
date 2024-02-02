@@ -216,8 +216,6 @@ project ('latihan-java-spring-rabbitmq:consumer-app') {
 		implementation project(':common')
 		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-amqp
 		implementation 'org.springframework.boot:spring-boot-starter-amqp:' + springBootRabbitMQVersion
-//		implementation 'org.springframework:spring-websocket:' + springWebSocketVersion
-//		implementation 'org.springframework:spring-messaging:' + springMessagingVersion
 		implementation 'org.springframework.boot:spring-boot-starter-webflux:' + springBootWebFluxVersion
 		implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:' + springThymeleafVersion
 		developmentOnly 'org.springframework.boot:spring-boot-devtools:' + springBootVersion
@@ -238,6 +236,17 @@ project ('latihan-java-rabbitmq') {
 	dependencies {
 		implementation project(':common')
 		implementation 'org.springframework.boot:spring-boot-starter-amqp:' + springBootRabbitMQVersion
+	}
+}
+
+project ('latihan-java-spring-webflux') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-amqp
+		implementation 'org.springframework.boot:spring-boot-starter-webflux:' + springBootWebFluxVersion
+		implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:' + springThymeleafVersion
+		developmentOnly 'org.springframework.boot:spring-boot-devtools:' + springBootVersion
 	}
 }
 
