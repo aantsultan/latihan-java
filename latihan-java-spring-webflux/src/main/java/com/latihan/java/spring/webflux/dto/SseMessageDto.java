@@ -13,5 +13,6 @@ public class SseMessageDto {
 
     private Long currentData;
     private Long totalData;
+    private String type;
 
 }

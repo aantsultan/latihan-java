@@ -20,16 +20,39 @@
             line-height: 30px;
             color: white;
         }
+
+        #myProgressSave {
+            width: 100%;
+            background-color: #ddd;
+        }
+
+        #myBarSave {
+            width: 0;
+            height: 30px;
+            background-color: #04AA6D;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+        }
     </style>
 </head>
 <body>
 <h1>CLOSING PERIOD</h1>
 <a th:href="@{/}">Closing Period</a>
+<br>
+<label>Get Progress</label>
 <div id="myProgress">
     <div id="myBar">0%</div>
 </div>
-<button id="open" onclick="onOpen()">closing</button>
 <p id="result"></p>
+<br>
+<label>Save Progress</label>
+<div id="myProgressSave">
+    <div id="myBarSave">0%</div>
+</div>
+<p id="resultSave"></p>
+<p id="done"></p>
+<button id="open" onclick="onOpen()">closing</button>
 <script>
     'use strict';
 
@@ -37,9 +60,12 @@
     let eventSource = null;
     const SSE_NAME = "closing-period";
     const SSE_CLOSE = "close";
-
+    const SSE_SAVE_TYPE = "save";
+    const SSE_GET_TYPE = "get";
+    let elementBar = null;
 
     function onOpen() {
+        document.getElementById("open").disabled = true;
         const status = "CLOSE";
         eventSource = new EventSource(`${url}/${status}`);
         console.log("connection opening ...")
@@ -54,6 +80,7 @@
             console.info("connection closing ...");
             eventSource.close();
             console.info("connection closed");
+            document.getElementById("open").disabled = false;
         }
     }
 
@@ -62,29 +89,47 @@
             let result = event.data;
             if (result === SSE_CLOSE) {
                 onClose();
+                const element = document.createElement("span");
+                element.innerText = `DONE !`
+                document.getElementById("done").appendChild(element);
+                document.getElementById("open").disabled = false;
             } else {
                 const dto = JSON.parse(result);
                 const currentData = dto.currentData;
                 const totalData = dto.totalData;
-                const elementLi = document.createElement("span");
-                elementLi.textContent = `${currentData} of ${totalData}`;
-                document.getElementById("result").innerHTML = '';
-                document.getElementById("result").appendChild(elementLi);
-                move(currentData, totalData);
+                const type = dto.type;
+                const element = document.createElement("span");
+                if(type === SSE_GET_TYPE){
+                    element.textContent = `${currentData} of ${totalData}`;
+                    document.getElementById("result").innerHTML = '';
+                    document.getElementById("result").appendChild(element);
+                    move(currentData, totalData, type);
+                } else {
+                    element.textContent = `${currentData} of ${totalData}`;
+                    document.getElementById("resultSave").innerHTML = '';
+                    document.getElementById("resultSave").appendChild(element);
+                    move(currentData, totalData, type);
+                }
             }
         })
 
         eventSource.onerror = (err) => {
             console.error("error : ", err);
+            console.info("connection closing ...");
             eventSource.close();
+            console.info("connection closed");
+            document.getElementById("open").disabled = false;
         }
     }
-
-    function move(currentData, totalData) {
-        let elem = document.getElementById("myBar");
+    function move(currentData, totalData, type) {
+        if(type === SSE_GET_TYPE){
+            elementBar = document.getElementById("myBar")
+        } else {
+            elementBar = document.getElementById("myBarSave")
+        }
         let width = Math.floor((currentData/totalData) * 100);
-        elem.style.width = width + "%";
-        elem.innerHTML = width  + "%";
+        elementBar.style.width = width + "%";
+        elementBar.innerHTML = width  + "%";
     }
 </script>
 </body>

@@ -12,9 +12,11 @@ public class InventoryClosingPeriodServiceImpl implements InventoryClosingPeriod
 
     @Override
     public void saveAll(List<InventoryClosingPeriod> closingPeriods) {
-//        for (InventoryClosingPeriod closingPeriod : closingPeriods) {
-//            log.info("Save data : {}", closingPeriod.getSku());
-//        }
         log.info("Save data is done");
+    }
+
+    @Override
+    public void save(InventoryClosingPeriod inventoryClosingPeriod) {
+        log.info("Save single");
     }
 }

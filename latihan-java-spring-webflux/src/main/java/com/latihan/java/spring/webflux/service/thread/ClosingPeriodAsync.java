@@ -48,6 +48,7 @@ public class ClosingPeriodAsync {
                 SseMessageDto messageDto = SseMessageDto.builder()
                         .currentData(currentData)
                         .totalData(totalData)
+                        .type(SSEConstant.GET_TYPE)
                         .build();
 
                 SseEmitter.SseEventBuilder event = SseEmitter.event()
@@ -58,12 +59,33 @@ public class ClosingPeriodAsync {
 
                 currentData++;
             }
+
+            // reset value
+            currentData = 1L;
+            totalData = inventoryClosingPeriods.size();
+
+            for (InventoryClosingPeriod inventoryClosingPeriod : inventoryClosingPeriods) {
+                inventoryClosingPeriodService.save(inventoryClosingPeriod);
+
+                SseMessageDto messageDto = SseMessageDto.builder()
+                        .currentData(currentData)
+                        .totalData(totalData)
+                        .type(SSEConstant.SAVE_TYPE)
+                        .build();
+
+                SseEmitter.SseEventBuilder event = SseEmitter.event()
+                        .data(mapper.writeValueAsString(messageDto))
+                        .id(String.valueOf(currentData))
+                        .name(SSEConstant.SSE_NAME_CLOSING_PERIOD);
+                emitter.send(event);
+                currentData++;
+            }
+
             emitter.send(SseEmitter.event().name(SSEConstant.SSE_NAME_CLOSING_PERIOD).data(SSEConstant.CLOSE));
         } catch (Exception e) {
             emitter.completeWithError(e);
         }
 
-        inventoryClosingPeriodService.saveAll(inventoryClosingPeriods);
     }
 
 }
