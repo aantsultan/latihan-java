@@ -1,37 +1,40 @@
 package com.latihan.java.spring.webflux.service.thread;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.latihan.java.spring.webflux.constant.SSEConstant;
 import com.latihan.java.spring.webflux.dto.SseMessageDto;
 import com.latihan.java.spring.webflux.model.InventoryClosingPeriod;
 import com.latihan.java.spring.webflux.model.InventorySummary;
 import com.latihan.java.spring.webflux.service.InventoryClosingPeriodService;
 import com.latihan.java.spring.webflux.service.InventorySummaryService;
+import com.latihan.java.spring.webflux.service.event.PublishEventService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class ClosingPeriodAsync {
+@Slf4j
+public class ClosingPeriodAsyncStream {
 
     private final InventorySummaryService inventorySummaryService;
     private final InventoryClosingPeriodService inventoryClosingPeriodService;
-    private final ObjectMapper mapper;
+    private final PublishEventService publishEventService;
 
     @Autowired
-    public ClosingPeriodAsync(InventorySummaryService inventorySummaryService, InventoryClosingPeriodService inventoryClosingPeriodService, ObjectMapper mapper) {
+    public ClosingPeriodAsyncStream(InventorySummaryService inventorySummaryService, InventoryClosingPeriodService inventoryClosingPeriodService
+            , PublishEventService publishEventService) {
         this.inventorySummaryService = inventorySummaryService;
         this.inventoryClosingPeriodService = inventoryClosingPeriodService;
-        this.mapper = mapper;
+        this.publishEventService = publishEventService;
     }
 
-    @Async("executorClosingPeriod")
-    public void closingAsync(SseEmitter emitter) {
+    @Async
+    public void closingAsync() throws InterruptedException {
+        log.info("Closing Async start");
         List<InventorySummary> inventorySummaries = inventorySummaryService.findAll();
         List<InventoryClosingPeriod> inventoryClosingPeriods = new ArrayList<>();
         long currentData = 1L;
@@ -52,11 +55,7 @@ public class ClosingPeriodAsync {
                         .type(SSEConstant.GET_TYPE)
                         .build();
 
-                SseEmitter.SseEventBuilder event = SseEmitter.event()
-                        .data(mapper.writeValueAsString(messageDto))
-                        .id(String.valueOf(currentData))
-                        .name(SSEConstant.SSE_NAME_CLOSING_PERIOD);
-                emitter.send(event);
+                publishEventService.publish(messageDto);
 
                 currentData++;
             }
@@ -74,19 +73,22 @@ public class ClosingPeriodAsync {
                         .type(SSEConstant.SAVE_TYPE)
                         .build();
 
-                SseEmitter.SseEventBuilder event = SseEmitter.event()
-                        .data(mapper.writeValueAsString(messageDto))
-                        .id(String.valueOf(currentData))
-                        .name(SSEConstant.SSE_NAME_CLOSING_PERIOD);
-                emitter.send(event);
+                publishEventService.publish(messageDto);
                 currentData++;
             }
 
-            emitter.send(SseEmitter.event().name(SSEConstant.SSE_NAME_CLOSING_PERIOD).data(SSEConstant.CLOSE));
+            SseMessageDto messageDto = SseMessageDto.builder()
+                    .currentData(currentData)
+                    .totalData(totalData)
+                    .type(SSEConstant.CLOSE)
+                    .build();
+            publishEventService.publish(messageDto);
+            log.info("Closing Async END");
+
         } catch (Exception e) {
-            emitter.completeWithError(e);
+            log.error(e.getMessage(), e);
+            throw new InterruptedException(e.getMessage());
         }
 
     }
-
 }

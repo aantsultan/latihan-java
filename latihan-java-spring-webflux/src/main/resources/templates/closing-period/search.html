@@ -7,26 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Closing Period</title>
     <style>
-        #myProgress {
+        .myProgress {
             width: 100%;
             background-color: #ddd;
         }
 
-        #myBar {
-            width: 0;
-            height: 30px;
-            background-color: #04AA6D;
-            text-align: center;
-            line-height: 30px;
-            color: white;
-        }
-
-        #myProgressSave {
-            width: 100%;
-            background-color: #ddd;
-        }
-
-        #myBarSave {
+        .myBar {
             width: 0;
             height: 30px;
             background-color: #04AA6D;
@@ -41,18 +27,34 @@
 <a th:href="@{/}">Closing Period</a>
 <br>
 <label>Get Progress</label>
-<div id="myProgress">
-    <div id="myBar">0%</div>
+<div id="myProgress" class="myProgress">
+    <div id="myBar" class="myBar">0%</div>
 </div>
 <p id="result"></p>
 <br>
 <label>Save Progress</label>
-<div id="myProgressSave">
-    <div id="myBarSave">0%</div>
+<div id="myProgressSave" class="myProgress">
+    <div id="myBarSave" class="myBar">0%</div>
 </div>
 <p id="resultSave"></p>
 <p id="done"></p>
 <button id="open" onclick="onOpen()">closing</button>
+
+<h1>Closing Period Stream</h1>
+<label>Get Progress</label>
+<div id="myProgressStream" class="myProgress">
+    <div id="myBarStream" class="myBar">0%</div>
+</div>
+<p id="resultStream"></p>
+<br>
+<label>Save Progress</label>
+<div id="myProgressSaveStream" class="myProgress">
+    <div id="myBarSaveStream" class="myBar">0%</div>
+</div>
+<p id="resultSaveStream"></p>
+<p id="doneStream"></p>
+<button id="openStream" onclick="onOpenStream()">closing stream</button>
+
 <script>
     'use strict';
 
@@ -63,6 +65,10 @@
     const SSE_SAVE_TYPE = "save";
     const SSE_GET_TYPE = "get";
     let elementBar = null;
+    const request = {
+        "status":"status",
+        "message":"message"
+    }
 
     function onOpen() {
         document.getElementById("open").disabled = true;
@@ -80,7 +86,6 @@
             console.info("connection closing ...");
             eventSource.close();
             console.info("connection closed");
-            document.getElementById("open").disabled = false;
         }
     }
 
@@ -89,6 +94,7 @@
             let result = event.data;
             if (result === SSE_CLOSE) {
                 onClose();
+                document.getElementById("open").disabled = false;
                 const element = document.createElement("span");
                 element.innerText = `DONE !`
                 document.getElementById("done").appendChild(element);
@@ -113,13 +119,8 @@
             }
         })
 
-        eventSource.onerror = (err) => {
-            console.error("error : ", err);
-            console.info("connection closing ...");
-            eventSource.close();
-            console.info("connection closed");
-            document.getElementById("open").disabled = false;
-        }
+        onError();
+        document.getElementById("open").disabled = false;
     }
     function move(currentData, totalData, type) {
         if(type === SSE_GET_TYPE){
@@ -130,6 +131,74 @@
         let width = Math.floor((currentData/totalData) * 100);
         elementBar.style.width = width + "%";
         elementBar.innerHTML = width  + "%";
+    }
+
+    function moveStream(currentData, totalData, type) {
+        if(type === SSE_GET_TYPE){
+            elementBar = document.getElementById("myBarStream")
+        } else {
+            elementBar = document.getElementById("myBarSaveStream")
+        }
+        let width = Math.floor((currentData/totalData) * 100);
+        elementBar.style.width = width + "%";
+        elementBar.innerHTML = width  + "%";
+    }
+
+    function onOpenStream(){
+        eventSource = new EventSource(`${url}`);
+        console.log("connection opening ...")
+        eventSource.addEventListener("open", function () {
+            console.log("connection opened");
+        })
+        getClosingStatus().then(data => console.info(data));
+        eventSource.addEventListener(SSE_NAME, function (event) {
+            let json = JSON.parse(event.data);
+            let result = json.message;
+            let type = result.type;
+            let currentData = result.currentData;
+            let totalData = result.totalData;
+            if(type === SSE_CLOSE){
+                onClose();
+            } else {
+                const element = document.createElement("span");
+                if(type === SSE_GET_TYPE){
+                    element.textContent = `${currentData} of ${totalData}`;
+                    document.getElementById("resultStream").innerHTML = '';
+                    document.getElementById("resultStream").appendChild(element);
+                    moveStream(currentData, totalData, type);
+                } else {
+                    element.textContent = `${currentData} of ${totalData}`;
+                    document.getElementById("resultSaveStream").innerHTML = '';
+                    document.getElementById("resultSaveStream").appendChild(element);
+                    moveStream(currentData, totalData, type);
+                }
+            }
+        })
+
+        onError();
+    }
+
+    function onError(){
+        eventSource.onerror = (err) => {
+            console.error("error : ", err);
+            onClose();
+        }
+    }
+
+    function getClosingStatus(){
+        return new Promise(function (resolve, reject){
+            const ajax = new XMLHttpRequest();
+            ajax.open("POST", url);
+            ajax.setRequestHeader("Content-Type", "application/json")
+            ajax.onload = function (){
+                if(ajax.status === 200){
+                    resolve(ajax.responseText);
+                } else {
+                    reject(`error : ${ajax.responseText}`);
+                }
+            }
+            ajax.send(JSON.stringify(request));
+        })
     }
 </script>
 </body>

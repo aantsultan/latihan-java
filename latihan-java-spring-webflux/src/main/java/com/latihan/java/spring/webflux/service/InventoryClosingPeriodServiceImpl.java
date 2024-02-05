@@ -17,6 +17,6 @@ public class InventoryClosingPeriodServiceImpl implements InventoryClosingPeriod
 
     @Override
     public void save(InventoryClosingPeriod inventoryClosingPeriod) {
-        log.info("Save single");
+
     }
 }
