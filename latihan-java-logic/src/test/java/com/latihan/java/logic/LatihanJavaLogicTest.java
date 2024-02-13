@@ -62,4 +62,12 @@ public class LatihanJavaLogicTest {
                 "order by min(coalesce(mp.product_sort, 0))";
         System.out.println(value);
     }
+
+    @Test
+    void sumData(){
+        Integer goodStockHand = 100;
+        Integer goodStock = 50;
+        goodStockHand = goodStockHand + goodStock;
+        Assertions.assertEquals(150, goodStockHand);
+    }
 }

@@ -59,7 +59,6 @@
     'use strict';
 
     const url = "[[@{/closing-period/close}]]";
-    let eventSource = null;
     const SSE_NAME = "closing-period";
     const SSE_CLOSE = "close";
     const SSE_SAVE_TYPE = "save";
@@ -68,6 +67,22 @@
     const request = {
         "status":"status",
         "message":"message"
+    }
+    let eventSource;
+    let eventState = localStorage.getItem(SSE_NAME);
+    // let db;
+    // const openRequest = window.indexedDB.open(SSE_NAME, 1);
+    // openRequest.addEventListener("error", () => console.error("failed to open"));
+    // openRequest.addEventListener("success", () => console.info("success connect"));
+    // db = openRequest.result;
+    if(eventState && eventState === '1'){
+        document.getElementById("openStream").disabled = true;
+        onOpenDefault();
+        onMessageStream();
+        onError();
+    } else {
+        console.info('initial event resource');
+        eventSource = null;
     }
 
     function onOpen() {
@@ -120,7 +135,6 @@
         })
 
         onError();
-        document.getElementById("open").disabled = false;
     }
     function move(currentData, totalData, type) {
         if(type === SSE_GET_TYPE){
@@ -135,22 +149,26 @@
 
     function moveStream(currentData, totalData, type) {
         if(type === SSE_GET_TYPE){
-            elementBar = document.getElementById("myBarStream")
+            elementBar = document.getElementById("myBarStream");
         } else {
-            elementBar = document.getElementById("myBarSaveStream")
+            elementBar = document.getElementById("myBarSaveStream");
         }
         let width = Math.floor((currentData/totalData) * 100);
         elementBar.style.width = width + "%";
         elementBar.innerHTML = width  + "%";
     }
 
-    function onOpenStream(){
+    function onOpenDefault(){
         eventSource = new EventSource(`${url}`);
-        console.log("connection opening ...")
+        console.info("connection opening ...")
         eventSource.addEventListener("open", function () {
-            console.log("connection opened");
+            console.info("connection opened");
+            console.info(`OPEN ${eventSource.readyState}`);
+            localStorage.setItem(SSE_NAME, `${eventSource.readyState}`);
         })
-        getClosingStatus().then(data => console.info(data));
+    }
+
+    function onMessageStream(){
         eventSource.addEventListener(SSE_NAME, function (event) {
             let json = JSON.parse(event.data);
             let result = json.message;
@@ -159,6 +177,13 @@
             let totalData = result.totalData;
             if(type === SSE_CLOSE){
                 onClose();
+                localStorage.removeItem(SSE_NAME);
+                console.info(`CLOSED ${eventSource.readyState}`);
+                document.getElementById("openStream").disabled = false;
+                const element = document.createElement("span");
+                element.innerText = `DONE !`
+                document.getElementById("doneStream").appendChild(element);
+                document.getElementById("openStream").disabled = false;
             } else {
                 const element = document.createElement("span");
                 if(type === SSE_GET_TYPE){
@@ -174,7 +199,13 @@
                 }
             }
         })
+    }
 
+    function onOpenStream(){
+        document.getElementById("openStream").disabled = true;
+        onOpenDefault();
+        getClosingStatus().then(data => console.info(data));
+        onMessageStream();
         onError();
     }
 
@@ -182,6 +213,9 @@
         eventSource.onerror = (err) => {
             console.error("error : ", err);
             onClose();
+            console.info(`ERROR CLOSED ${eventSource.readyState}`);
+            document.getElementById("open").disabled = false;
+            document.getElementById("openStream").disabled = false;
         }
     }
 

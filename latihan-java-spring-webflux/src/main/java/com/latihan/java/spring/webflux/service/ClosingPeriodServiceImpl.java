@@ -83,6 +83,7 @@ public class ClosingPeriodServiceImpl implements ClosingPeriodService {
                         .data(mapper.writeValueAsString(message))
                         .id(String.valueOf(message.getMessage().getCurrentData()))
                         .name(SSEConstant.SSE_NAME_CLOSING_PERIOD);
+                log.info("event listener {} {}", message.getMessage().getType(), message.getMessage().getCurrentData());
                 emitter.send(event);
             } catch (Exception e) {
                 errorEmitters.add(emitter);
