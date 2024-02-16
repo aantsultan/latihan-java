@@ -70,4 +70,30 @@ public class LatihanJavaLogicTest {
         goodStockHand = goodStockHand + goodStock;
         Assertions.assertEquals(150, goodStockHand);
     }
+
+    @Test
+    void generateSqlString(){
+        String value = "select " +
+                "0 as inventory_transaction_id " +
+                ", tit.sku " +
+                ", tit.sales_group_id " +
+                ", tit.warehouse_code " +
+                ", tit.base_uom_code " +
+                ", tit.product_name " +
+                ", sum(coalesce(tit.quantity_good_stock, 0)) as quantity_good_stock " +
+                ", sum(coalesce(tit.quantity_bad_stock, 0)) as quantity_bad_stock " +
+                "from hts.dbo.trx_inventory_transaction tit " +
+                "where format(transaction_date, 'yyyy-MM-dd') <= :date " +
+                "group by tit.sku" +
+                ", tit.sales_group_id " +
+                ", tit.warehouse_code " +
+                ", tit.base_uom_code " +
+                ", tit.product_name ; ";
+        System.out.println(value);
+    }
+
+    @Test
+    void generateTime(){
+
+    }
 }

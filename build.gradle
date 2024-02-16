@@ -250,6 +250,17 @@ project ('latihan-java-spring-webflux') {
 	}
 }
 
+project ('latihan-java-spring-restful-api'){
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-amqp
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa:' + springDataJpaVersion
+		implementation 'org.springframework.boot:spring-boot-starter-validation:' + springBootValidationVersion
+		runtimeOnly 'com.mysql:mysql-connector-j:' + mySqlConnectorVersion
+	}
+}
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
