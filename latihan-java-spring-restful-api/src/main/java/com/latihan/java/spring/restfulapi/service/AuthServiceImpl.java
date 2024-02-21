@@ -34,7 +34,7 @@ public class AuthServiceImpl implements AuthService {
         User user = userRepository.findById(request.getUsername()).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Username or password wrong"));
 
-        if(BCrypt.checkpw(request.getPassword(), user.getPassword())) {
+        if (BCrypt.checkpw(request.getPassword(), user.getPassword())) {
             user.setToken(UUID.randomUUID().toString());
             user.setTokenExpiredAt(this.next30Days());
             userRepository.save(user);
@@ -48,7 +48,15 @@ public class AuthServiceImpl implements AuthService {
         }
     }
 
-    private Long next30Days(){
+    @Transactional
+    @Override
+    public void logout(User user) {
+        user.setToken(null);
+        user.setTokenExpiredAt(null);
+        userRepository.save(user);
+    }
+
+    private Long next30Days() {
         return System.currentTimeMillis() + (1000L * 36 * 24 * 30);
     }
 }

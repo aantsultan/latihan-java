@@ -2,6 +2,7 @@ package com.latihan.java.spring.restfulapi.service;
 
 import com.latihan.java.spring.restfulapi.entity.User;
 import com.latihan.java.spring.restfulapi.model.RegisterUserRequest;
+import com.latihan.java.spring.restfulapi.model.UpdateUserRequest;
 import com.latihan.java.spring.restfulapi.model.UserResponse;
 import com.latihan.java.spring.restfulapi.repository.UserRepository;
 import com.latihan.java.spring.restfulapi.security.BCrypt;
@@ -10,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.Objects;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -50,4 +53,26 @@ public class UserServiceImpl implements UserService {
                 .name(user.getName())
                 .build();
     }
+
+    @Override
+    public UserResponse update(User user, UpdateUserRequest request) {
+        validationService.validate(request);
+
+        if(Objects.nonNull(request.getName())){
+            user.setName(request.getName());
+        }
+
+        if(Objects.nonNull(request.getPassword())){
+            user.setPassword(BCrypt.hashpw(request.getPassword(), BCrypt.gensalt()));
+        }
+
+        repository.save(user);
+
+        return UserResponse.builder()
+                .name(user.getName())
+                .username(user.getUsername())
+                .build();
+    }
+
+
 }
