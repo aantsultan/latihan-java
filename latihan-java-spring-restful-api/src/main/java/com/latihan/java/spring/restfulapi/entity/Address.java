@@ -30,10 +30,6 @@ public class Address {
     @Column(name = "postal_code")
     private String postalCode;
 
-    private String phone;
-
-    private String email;
-
     @ManyToOne
     @JoinColumn(name = "contact_id", referencedColumnName = "id")
     private Contact contact;

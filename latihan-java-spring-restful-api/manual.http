@@ -1,0 +1,116 @@
+### REGISTER
+
+POST http://localhost:8080/api/users
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username": "aant",
+  "password": "rahasia",
+  "name": "Aant Sultan"
+}
+
+### LOGIN
+
+POST http://localhost:8080/api/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username": "aant",
+  "password": "rahasia"
+}
+
+### GET USER
+GET http://localhost:8080/api/users/current
+Accept: application/json
+X-API-TOKEN: d0b88dff-492c-443f-b932-d854e42515d6
+
+### UPDATE USER
+PATCH http://localhost:8080/api/users/current
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: d0b88dff-492c-443f-b932-d854e42515d6
+
+{
+  "name": "A-Ant Sultan R"
+}
+
+### CREATE CONTACT
+POST http://localhost:8080/api/contacts
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: d0b88dff-492c-443f-b932-d854e42515d6
+
+{
+  "firstName": "Prabo",
+  "lastName": "WOWO",
+  "email": "prabo@example.com",
+  "phone": "+121121"
+}
+
+### SEARCH CONTACT
+GET http://localhost:8080/api/contacts?email=joko
+Accept: application/json
+X-API-TOKEN: d0b88dff-492c-443f-b932-d854e42515d6
+
+### GET CONTACT
+GET http://localhost:8080/api/contacts/b3df839a-cd4e-412d-a43f-6e8b859df089
+Accept: application/json
+X-API-TOKEN: d0b88dff-492c-443f-b932-d854e42515d6
+
+### UPDATE CONTACT
+PUT http://localhost:8080/api/contacts/b3df839a-cd4e-412d-a43f-6e8b859df089
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: d0b88dff-492c-443f-b932-d854e42515d6
+
+{
+  "firstName": "Joko BARU",
+  "lastName": "Wido BARU",
+  "email": "joko.baru@example.com",
+  "phone": "+411312312777"
+}
+
+### REMOVE CONTACT
+DELETE http://localhost:8080/api/contacts/e5e48d61-2e17-40de-8bb6-bc0289a0ee48
+Accept: application/json
+X-API-TOKEN: d0b88dff-492c-443f-b932-d854e42515d6
+
+### CREATE ADDRESS
+POST http://localhost:8080/api/contacts/b3df839a-cd4e-412d-a43f-6e8b859df089/addresses
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: d0b88dff-492c-443f-b932-d854e42515d6
+
+{
+  "street": "jalan",
+  "city": "menteng",
+  "province": "jakarta",
+  "country": "indonesia",
+  "postalCode": "1234"
+}
+
+### LIST ADDRESS
+GET http://localhost:8080/api/contacts/b3df839a-cd4e-412d-a43f-6e8b859df089/addresses
+Accept: application/json
+X-API-TOKEN: d0b88dff-492c-443f-b932-d854e42515d6
+
+### UPDATE ADDRESS
+PUT http://localhost:8080/api/contacts/b3df839a-cd4e-412d-a43f-6e8b859df089/addresses/bf05197b-9eb8-4ad0-899f-c007b43d31cb
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: d0b88dff-492c-443f-b932-d854e42515d6
+
+{
+  "street": "jalan baru",
+  "city": "menteng baru",
+  "province": "jakarta baru",
+  "country": "indonesia baru",
+  "postalCode": "44444"
+}
+
+### REMOVE ADDRESS
+DELETE http://localhost:8080/api/contacts/b3df839a-cd4e-412d-a43f-6e8b859df089/addresses/bf05197b-9eb8-4ad0-899f-c007b43d31cb
+Accept: application/json
+X-API-TOKEN: d0b88dff-492c-443f-b932-d854e42515d6
