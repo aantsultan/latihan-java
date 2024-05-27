@@ -261,6 +261,14 @@ project ('latihan-java-spring-restful-api'){
 	}
 }
 
+project ('latihan-java-thread') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+	}
+}
+
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
