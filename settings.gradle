@@ -26,5 +26,6 @@ include 'latihan-java-rabbitmq'
 include 'latihan-java-spring-webflux'
 include 'latihan-java-spring-restful-api'
 include 'latihan-java-thread'
+include 'latihan-java-oop'
 
 include 'common'

@@ -268,6 +268,13 @@ project ('latihan-java-thread') {
 	}
 }
 
+project ('latihan-java-oop') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+	}
+}
+
 
 configurations {
 	compileOnly {

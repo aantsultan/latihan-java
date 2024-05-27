@@ -1,9 +1,27 @@
 package com.latihan.java.reflection.model;
 
+import com.latihan.java.reflection.annotation.NotBlank;
+
+import java.util.List;
+
 public class Person {
 
+    @NotBlank
     private String firstName;
+    @NotBlank(allowEmptyString = true)
     private String lastName;
+
+    private int age;
+
+    private List<String> hobbies;
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -36,5 +54,16 @@ public class Person {
     public Person(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public Person() {
+    }
+
+    public List<String> getHobbies() {
+        return hobbies;
+    }
+
+    public void setHobbies(List<String> hobbies) {
+        this.hobbies = hobbies;
     }
 }
