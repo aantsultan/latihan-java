@@ -183,6 +183,14 @@ project ('latihan-java-spring-data-redis') {
 		implementation 'redis.clients:jedis:'+ redisClientsVersion +'@jar'
 		implementation 'org.apache.commons:commons-pool2:' + commonPoolVersion
 		implementation project(':common')
+
+		// https://mvnrepository.com/artifact/org.hamcrest/hamcrest
+		testImplementation 'org.hamcrest:hamcrest:' + hamcrestVersion
+
+		// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator
+		implementation 'org.springframework.boot:spring-boot-starter-actuator:' + springBootActuatorVersion
+
+
 	}
 }
 
