@@ -283,6 +283,16 @@ project ('latihan-java-oop') {
 	}
 }
 
+project ('latihan-java-datastructure-list') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common');
+
+		// https://mvnrepository.com/artifact/org.hamcrest/hamcrest
+		testImplementation 'org.hamcrest:hamcrest:' + hamcrestVersion
+	}
+}
+
 
 configurations {
 	compileOnly {

@@ -27,5 +27,6 @@ include 'latihan-java-spring-webflux'
 include 'latihan-java-spring-restful-api'
 include 'latihan-java-thread'
 include 'latihan-java-oop'
+include 'latihan-java-datastructure-list'
 
 include 'common'
