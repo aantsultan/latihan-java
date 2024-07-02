@@ -30,4 +30,15 @@ public class MethodTest {
         String firstName = (String)getFirstName.invoke(person);
         System.out.println(firstName);
     }
+
+    @Test
+    void getMethodPrivate() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Class<Person> personClass = Person.class;
+        Method getFirstName = personClass.getDeclaredMethod("getTest", int.class);
+        getFirstName.setAccessible(true);
+
+        Person person = new Person("aant", "sultan");
+        String firstName = (String)getFirstName.invoke(person, 1);
+        System.out.println(firstName);
+    }
 }

@@ -21,7 +21,7 @@ public class StockTransferServiceImpl implements StockTransferService {
     @Autowired
     private EntityManager entityManager;
 
-    private static final String sqlSelect = "SELECT \n" +
+    private static final String SQL_SELECT = "SELECT \n" +
             "stock_inbound_id as id,\n" +
             "sales_group_id,\n" +
             "warehouse_id,\n" +
@@ -37,10 +37,10 @@ public class StockTransferServiceImpl implements StockTransferService {
             "reason\n" +
             "FROM trx_stock_outbound";
 
-    private static final String sqlCount =
-            "SELECT COUNT(*) FROM (" + sqlSelect + ") un";
-    private static final String sqlFiltered =
-            "SELECT * FROM (" + sqlSelect + ") un " +
+    private static final String SQL_COUNT =
+            "SELECT COUNT(*) FROM (" + SQL_SELECT + ") un";
+    private static final String SQL_FILTERED =
+            "SELECT * FROM (" + SQL_SELECT + ") un " +
                     "WHERE (un.stock_type=:stockType or :stockType is null)";
 
     @Override
@@ -50,14 +50,14 @@ public class StockTransferServiceImpl implements StockTransferService {
         int start = input.getStart();
         int length = input.getLength();
 
-        Query querySelect = entityManager.createNativeQuery(sqlFiltered)
+        Query querySelect = entityManager.createNativeQuery(SQL_FILTERED)
                 .setParameter("stockType", ObjectUtils.isEmpty(stockType) ? null : stockType);
         List<StockTransferDto> result = querySelect
                 .setFirstResult(start * length)
                 .setMaxResults(length)
                 .getResultList();
 
-        Query queryCount = entityManager.createNativeQuery(sqlCount);
+        Query queryCount = entityManager.createNativeQuery(SQL_COUNT);
         Long totalRecords = Long.valueOf(queryCount.getResultList().get(0).toString());
 
         Page<StockTransferDto> output = new Page<>(result);

@@ -1,0 +1,15 @@
+### CREATE STUDENT
+POST http://localhost:8080/student
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": "123",
+  "name": "a-ant",
+  "gender": "MALE",
+  "grade": 1
+}
+
+### GET STUDENT
+GET http://localhost:8080/student/123
+Accept: application/json

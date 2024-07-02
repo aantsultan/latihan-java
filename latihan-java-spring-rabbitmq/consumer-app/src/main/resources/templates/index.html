@@ -1,0 +1,62 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="shortcut icon" href="#">
+</head>
+<body>
+<h1>
+    Hello World
+</h1>
+<p>Hello paragraph</p>
+<button>test lag</button>
+<p>tess</p>
+<p id="name"></p>
+<button id="open" onclick="onOpen()">open</button>
+<button id="close" onclick="onClose()">close</button>
+<ul id="result"></ul>
+<script>
+    'use strict';
+    let name = "Aant Sultan R";
+    document.getElementById("name").innerText = name;
+
+    const url = "[[@{/consume}]]" ;
+    let eventSource = null;
+    function onOpen(){
+        eventSource = new EventSource(url);
+        console.log("connection opening ...")
+        eventSource.addEventListener("open", function (event){
+            console.log("connection opened");
+        })
+        onMessage();
+    }
+
+    function onClose(){
+        if(eventSource){
+            console.info("connection closing ...")
+            eventSource.close();
+            console.info("connection closed");
+        }
+    }
+
+    function onMessage(){
+        eventSource.addEventListener("message", function(event){
+            let result = event.data;
+            const elementLi = document.createElement("li");
+            elementLi.textContent = result;
+            document.getElementById("result").appendChild(elementLi);
+            console.info(result);
+        })
+
+        eventSource.onerror = (err) => {
+            console.error("error : ", err);
+        }
+    }
+
+</script>
+</body>
+</html>

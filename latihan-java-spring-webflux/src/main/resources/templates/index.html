@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+</head>
+<body>
+<h1>Hello World</h1>
+<a th:href="@{/closing-period}">Closing Period</a>
+<button id="open" onclick="onOpen()">open</button>
+<button id="close" onclick="onClose()">close</button>
+<ul id="result"></ul>
+<script>
+    'use strict';
+
+//    const url = "[[@{/stream-sse-mvc}]]";
+    const url = "[[@{/stream-sse-flux}]]";
+    let eventSource = null;
+    const SSE_NAME = "sse";
+    const SSE_CLOSE = "close";
+
+
+    function onOpen() {
+        eventSource = new EventSource(url);
+        console.log("connection opening ...")
+        eventSource.addEventListener("open", function (event) {
+            console.log("connection opened");
+        })
+        onMessage();
+    }
+
+    function onClose() {
+        if (eventSource) {
+            console.info("connection closing ...");
+            eventSource.close();
+            console.info("connection closed");
+        }
+    }
+
+    function onMessage() {
+        eventSource.addEventListener(SSE_NAME, function (event) {
+            let result = event.data;
+
+            console.info(result);
+
+            if (result === SSE_CLOSE) {
+                onClose();
+            } else {
+                const elementLi = document.createElement("li");
+                elementLi.textContent = result;
+                document.getElementById("result").appendChild(elementLi);
+                console.info(result);
+            }
+        })
+
+        eventSource.onerror = (err) => {
+            console.error("error : ", err);
+            eventSource.close();
+        }
+    }
+</script>
+</body>
+</html>

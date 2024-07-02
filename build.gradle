@@ -1,6 +1,6 @@
 plugins {
 	id 'org.springframework.boot' version "${springBootVersion}"
-	id 'io.spring.dependency-management' version "${springDepedencyManagement}"
+	id 'io.spring.dependency-management' version "${springDependencyManagement}"
 	id 'java'
 }
 
@@ -19,12 +19,19 @@ allprojects{
 		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
 		testImplementation 'org.springframework.boot:spring-boot-starter-test:' + springBootVersion
 	}
+
+	test {
+		useJUnitPlatform()
+	}
 }
 
 project ('latihan-java-database') {
 	apply plugin: 'org.springframework.boot'
 	dependencies {
 		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa:' + springDataJpaVersion
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+		runtimeOnly 'com.h2database:h2:' + h2DatabaseVersion
 	}
 }
 
@@ -102,6 +109,190 @@ project ('latihan-java-spring-oauth2') {
 		annotationProcessor 'org.projectlombok:lombok:' + lombokVersion
 	}
 }
+
+project ('latihan-java-jms-activemq-artemis') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		// https://mvnrepository.com/artifact/org.apache.activemq/artemis-jms-client-all
+		implementation 'org.apache.activemq:artemis-jms-client-all:' + apacheActiveMqArtemisVersion
+
+	}
+}
+
+project ('latihan-java-spring-mongodb') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+		implementation 'org.springframework.boot:spring-boot-starter-data-mongodb:' + springDataMongoDBVersion
+	}
+}
+
+project ('latihan-java-atomikos') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa:' + springDataJpaVersion
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+		implementation 'com.microsoft.sqlserver:mssql-jdbc:' + sqlJdbcVersion
+		implementation 'org.postgresql:postgresql:' + postgresqlJdbcVersion
+		implementation 'com.atomikos:transactions-jdbc:' + atomikosJdbcVersion
+		implementation 'com.atomikos:transactions-jms:' + atomikosJmsVersion
+	}
+}
+
+project ('latihan-java-multiple-database') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa:' + springDataJpaVersion
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+		implementation 'com.microsoft.sqlserver:mssql-jdbc:' + sqlJdbcVersion
+		implementation 'org.postgresql:postgresql:' + postgresqlJdbcVersion
+	}
+}
+
+project ('latihan-java-spring-aop') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-aop:' + springAopVersion
+	}
+}
+
+project ('latihan-java-spring-design-pattern') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+	}
+}
+
+project ('latihan-java-logging') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+	}
+}
+
+project ('latihan-java-spring-data-redis') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+		implementation 'org.springframework.boot:spring-boot-starter-data-redis:' + springDataRedisVersion
+		implementation 'redis.clients:jedis:'+ redisClientsVersion +'@jar'
+		implementation 'org.apache.commons:commons-pool2:' + commonPoolVersion
+		implementation project(':common')
+
+		// https://mvnrepository.com/artifact/org.hamcrest/hamcrest
+		testImplementation 'org.hamcrest:hamcrest:' + hamcrestVersion
+
+		// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator
+		implementation 'org.springframework.boot:spring-boot-starter-actuator:' + springBootActuatorVersion
+
+
+	}
+}
+
+project ('latihan-java-apache-ignite') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+		implementation 'org.apache.ignite:ignite-core:' + igniteCoreVersion
+		implementation 'org.apache.ignite:ignite-spring:' + igniteSpringVersion
+		implementation project(':common')
+	}
+}
+
+project ('latihan-java-spring-apache-ignite') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+		implementation 'org.springframework.data:spring-data-commons:' + springDataCommonsVersion
+		implementation 'org.springframework:spring-tx:' + springTxVersion
+		implementation 'org.apache.ignite:ignite-core:' + igniteCoreVersion
+		implementation 'org.apache.ignite:ignite-indexing:' + igniteIndexingVersion
+		implementation 'org.apache.ignite:ignite-spring-boot-autoconfigure-ext:' + igniteSpringBootAutoconfigureExtVersion
+		implementation 'org.apache.ignite:ignite-spring-data-ext:' + igniteSpringDataExtVersion
+		implementation project(':common')
+	}
+}
+
+project ('latihan-java-spring-rabbitmq:consumer-app') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-amqp
+		implementation 'org.springframework.boot:spring-boot-starter-amqp:' + springBootRabbitMQVersion
+		implementation 'org.springframework.boot:spring-boot-starter-webflux:' + springBootWebFluxVersion
+		implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:' + springThymeleafVersion
+		developmentOnly 'org.springframework.boot:spring-boot-devtools:' + springBootVersion
+	}
+}
+
+project ('latihan-java-spring-rabbitmq:producer-app') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+		implementation 'org.springframework.boot:spring-boot-starter-amqp:' + springBootRabbitMQVersion
+	}
+}
+
+project ('latihan-java-rabbitmq') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-amqp:' + springBootRabbitMQVersion
+	}
+}
+
+project ('latihan-java-spring-webflux') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-amqp
+		implementation 'org.springframework.boot:spring-boot-starter-webflux:' + springBootWebFluxVersion
+		implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:' + springThymeleafVersion
+		developmentOnly 'org.springframework.boot:spring-boot-devtools:' + springBootVersion
+	}
+}
+
+project ('latihan-java-spring-restful-api'){
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-amqp
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa:' + springDataJpaVersion
+		implementation 'org.springframework.boot:spring-boot-starter-validation:' + springBootValidationVersion
+		runtimeOnly 'com.mysql:mysql-connector-j:' + mySqlConnectorVersion
+	}
+}
+
+project ('latihan-java-thread') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+	}
+}
+
+project ('latihan-java-oop') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+	}
+}
+
+project ('latihan-java-datastructure-list') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common');
+
+		// https://mvnrepository.com/artifact/org.hamcrest/hamcrest
+		testImplementation 'org.hamcrest:hamcrest:' + hamcrestVersion
+	}
+}
+
 
 configurations {
 	compileOnly {

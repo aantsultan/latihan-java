@@ -10,5 +10,23 @@ include 'latihan-java-restful-native:client-service' //port 8201
 include 'latihan-java-spring-session' //port 6379
 include 'latihan-java-spring-jpa-datatable' //port 8201
 include 'latihan-java-spring-oauth2' //port 8202
+include 'latihan-java-jms-activemq-artemis'
+include 'latihan-java-spring-mongodb'
+include 'latihan-java-atomikos'
+include 'latihan-java-multiple-database'
+include 'latihan-java-spring-aop'
+include 'latihan-java-spring-design-pattern'
+include 'latihan-java-logging'
+include 'latihan-java-spring-data-redis'
+include 'latihan-java-apache-ignite'
+include 'latihan-java-spring-apache-ignite'
+include 'latihan-java-spring-rabbitmq:consumer-app'
+include 'latihan-java-spring-rabbitmq:producer-app'
+include 'latihan-java-rabbitmq'
+include 'latihan-java-spring-webflux'
+include 'latihan-java-spring-restful-api'
+include 'latihan-java-thread'
+include 'latihan-java-oop'
+include 'latihan-java-datastructure-list'
 
 include 'common'
