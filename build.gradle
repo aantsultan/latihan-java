@@ -293,6 +293,18 @@ project ('latihan-java-datastructure-list') {
 	}
 }
 
+project ('latihan-java-monitoring') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+		implementation project(':common')
+
+		// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator
+		implementation 'org.springframework.boot:spring-boot-starter-actuator:' + springBootActuatorVersion
+		runtimeOnly 'io.micrometer:micrometer-registry-prometheus:' + prometheusVersion
+	}
+}
+
 
 configurations {
 	compileOnly {
