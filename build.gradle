@@ -305,6 +305,18 @@ project ('latihan-java-monitoring') {
 	}
 }
 
+project ('latihan-java-restful-api-flutter'){
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-amqp
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa:' + springDataJpaVersion
+		implementation 'org.springframework.boot:spring-boot-starter-validation:' + springBootValidationVersion
+		implementation 'org.springframework.boot:spring-boot-starter-security:' + springSessionVersion
+		runtimeOnly 'com.mysql:mysql-connector-j:' + mySqlConnectorVersion
+	}
+}
+
 
 configurations {
 	compileOnly {

@@ -29,5 +29,6 @@ include 'latihan-java-thread'
 include 'latihan-java-oop'
 include 'latihan-java-datastructure-list'
 include 'latihan-java-monitoring'
+include 'latihan-java-restful-api-flutter'
 
 include 'common'

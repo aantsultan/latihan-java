@@ -1,0 +1,32 @@
+### REGISTER
+
+POST http://localhost:8080/api/users
+Accept: application/json
+Content-Type: application/json
+
+{
+  "fullName":"aant sultan rahmanya",
+  "email":"aant@mail.com",
+  "phoneNumber":"+62111111111",
+  "birthDate":"2027-01-01",
+  "gender":"MALE",
+  "password":"rahasia",
+  "confirmPassword":"rahasia",
+  "promoEvents":true,
+  "termConditions":true
+}
+
+### LOGIN
+POST http://localhost:8080/api/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "phoneNumber":"+62111111111",
+  "password":"rahasia"
+}
+
+### GET USER
+GET http://localhost:8080/api/users/current
+Accept: application/json
+X-API-TOKEN: f5dcbfa2-3977-469c-a00d-c2eb257bd07b
