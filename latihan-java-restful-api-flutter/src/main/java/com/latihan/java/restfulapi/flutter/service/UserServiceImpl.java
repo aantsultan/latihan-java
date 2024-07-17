@@ -1,5 +1,6 @@
 package com.latihan.java.restfulapi.flutter.service;
 
+import com.google.gson.Gson;
 import com.latihan.java.restfulapi.flutter.dto.request.CreateUserRequest;
 import com.latihan.java.restfulapi.flutter.dto.request.LoginRequest;
 import com.latihan.java.restfulapi.flutter.dto.response.TokenResponse;
@@ -40,9 +41,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private HttpServletRequest httpServletRequest;
 
+    @Autowired
+    private Gson gson;
+
     @Override
     public WebResponse<String> create(CreateUserRequest request) {
-
+        log.info("Request UserServiceImpl {}", gson.toJson(request));
         validatorService.validate(request);
         this.validate(request);
 
@@ -56,13 +60,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setPromoEvents(request.getPromoEvents());
         user.setTermConditions(request.getTermConditions());
         repository.save(user);
+        log.info("Response UserServiceImpl {}", gson.toJson(user));
         return WebResponse.<String>builder()
                 .data("OK").build();
     }
 
     @Override
     public WebResponse<TokenResponse> auth(LoginRequest request) {
-
+        log.info("Request auth : {}", gson.toJson(request));
         validatorService.validate(request);
 
         User user = repository.findByPhoneNumber(request.getPhoneNumber())
@@ -72,6 +77,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             user.setToken(UUID.randomUUID().toString());
             user.setTokenExpiredAt(System.currentTimeMillis() + (1000L * 60 * 60 * 24 * 30));
             repository.save(user);
+            log.info("Response auth : {}", gson.toJson(user));
             return WebResponse.<TokenResponse>builder()
                     .data(TokenResponse.builder()
                             .token(user.getToken())
@@ -79,6 +85,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                             .build())
                     .build();
         }
+        log.error("Response auth : Username or password is incorrect");
         throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Username or password is incorrect");
     }
 
@@ -108,7 +115,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         }
 
         Optional<User> opt = repository.findByPhoneNumber(request.getPhoneNumber());
-        if(opt.isPresent()){
+        if (opt.isPresent()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User already exist");
         }
 

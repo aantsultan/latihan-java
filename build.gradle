@@ -314,6 +314,7 @@ project ('latihan-java-restful-api-flutter'){
 		implementation 'org.springframework.boot:spring-boot-starter-validation:' + springBootValidationVersion
 		implementation 'org.springframework.boot:spring-boot-starter-security:' + springSessionVersion
 		runtimeOnly 'com.mysql:mysql-connector-j:' + mySqlConnectorVersion
+		implementation 'com.google.code.gson:gson:' + gsonVersion
 	}
 }
 

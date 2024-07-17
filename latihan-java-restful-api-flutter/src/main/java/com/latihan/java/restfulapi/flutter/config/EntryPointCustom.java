@@ -24,11 +24,12 @@ public class EntryPointCustom extends Http403ForbiddenEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException arg2) throws IOException {
         if (response.getStatus() == HttpStatus.UNAUTHORIZED.value()) {
+            byte[] result = objectMapper.writeValueAsBytes(WebResponse.<String>builder()
+                    .errors(ErrorEnum.ERROR_401.getValue())
+                    .build());
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
             OutputStream outputStream = response.getOutputStream();
-            outputStream.write(objectMapper.writeValueAsBytes(WebResponse.<String>builder()
-                    .errors(ErrorEnum.ERROR_401.getValue())
-                    .build()));
+            outputStream.write(result);
             outputStream.flush();
         }
     }
