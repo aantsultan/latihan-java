@@ -1,26 +1,21 @@
 package com.latihan.java.restfulapi.flutter.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.latihan.java.restfulapi.flutter.dto.response.WebResponse;
 import com.latihan.java.restfulapi.flutter.model.User;
 import com.latihan.java.restfulapi.flutter.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.filter.OncePerRequestFilter;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -34,9 +29,6 @@ public class FilterCustom extends OncePerRequestFilter {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String urlRequest = request.getRequestURI();
@@ -45,14 +37,20 @@ public class FilterCustom extends OncePerRequestFilter {
         if (isNotWhitelistUrl) {
             String token = request.getHeader("X-API-TOKEN");
             if (token == null) {
-                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Username and password is incorrect");
+                response.setStatus(HttpStatus.UNAUTHORIZED.value());
+                filterChain.doFilter(request, response);
+                return;
             }
             Optional<User> opt = userRepository.findByToken(token);
             if (!opt.isPresent()) {
-                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Username and password is incorrect");
+                response.setStatus(HttpStatus.UNAUTHORIZED.value());
+                filterChain.doFilter(request, response);
+                return;
             }
             if (opt.get().getTokenExpiredAt() < System.currentTimeMillis()) {
-                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Username and password is incorrect");
+                response.setStatus(HttpStatus.UNAUTHORIZED.value());
+                filterChain.doFilter(request, response);
+                return;
             }
 
             UsernamePasswordAuthenticationToken authenticationToken =

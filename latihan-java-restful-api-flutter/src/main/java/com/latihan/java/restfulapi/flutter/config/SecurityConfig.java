@@ -9,14 +9,10 @@ import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
-
-import java.util.HashMap;
-import java.util.Map;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import static com.latihan.java.restfulapi.flutter.helper.WebConstant.WHITELIST_URL;
 
@@ -44,7 +40,9 @@ public class SecurityConfig {
                     auth.mvcMatchers(WHITELIST_URL).permitAll();
                     auth.anyRequest().authenticated();
                 })
-                .addFilterBefore(filterCustom, FilterSecurityInterceptor.class);
+                .exceptionHandling().authenticationEntryPoint(entryPointCustom)
+                .and()
+                .addFilterAfter(filterCustom, BasicAuthenticationFilter.class);
         return http.build();
     }
 

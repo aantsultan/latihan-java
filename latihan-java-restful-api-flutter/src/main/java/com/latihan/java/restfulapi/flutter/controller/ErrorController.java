@@ -21,9 +21,9 @@ public class ErrorController {
 
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<WebResponse<String>> responseStatus(ResponseStatusException exception) {
-        return ResponseEntity.badRequest().body(
-                WebResponse.<String>builder()
-                        .errors(exception.getMessage())
-                        .build());
+        return new ResponseEntity<>(WebResponse.<String>builder()
+                .errors(exception.getMessage())
+                .build(),
+                exception.getStatus());
     }
 }
