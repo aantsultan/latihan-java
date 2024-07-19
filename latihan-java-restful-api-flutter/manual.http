@@ -1,13 +1,13 @@
 ### REGISTER
 
-POST http://localhost:8080/api/users
+POST {{url}}/api/users
 Accept: application/json
 Content-Type: application/json
 
 {
   "fullName":"aant sultan rahmanya",
   "email":"aant@mail.com",
-  "phoneNumber":"+62111111111",
+  "phoneNumber":"+62111111112",
   "birthDate":"2027-01-01",
   "gender":"MALE",
   "password":"rahasia",
@@ -17,16 +17,23 @@ Content-Type: application/json
 }
 
 ### LOGIN
-POST http://localhost:8080/api/auth/login
-Accept: application/json
-Content-Type: application/json
-
-{
-  "phoneNumber":"+62111111111",
-  "password":"rahasia"
-}
+#POST {{url}}/api/auth/login
+#Accept: application/json
+#Content-Type: application/json
+#
+#{
+#  "phoneNumber":"+62111111111",
+#  "password":"rahasia"
+#}
 
 ### GET USER
-GET http://localhost:8080/api/users/current
+GET {{url}}/api/users/current
 Accept: application/json
-X-API-TOKEN: f5dcbfa2-3977-469c-a00d-c2eb257bd07b
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJHZXQgQXJyYXlzLCBMTEMiLCJhdWQiOiJVc2VyIE1hbmFnZW1lbnQgUG9ydGFsIiwiaWF0IjoxNzIxMzg0OTczLCJzdWIiOiIrNjIxMTExMTExMTEiLCJBdXRob3JpdGllcyI6W10sImV4cCI6MTcyMzk3Njk2OH0.lSsCCujZTwINm6QniBdt6YTneC7Q_pC2eKbB_RfnW-Be9AvSECCmpwy_AN6Gp04gCLalD3tQFHJ935MZxlbQGA
+
+### GET TOKEN
+GET {{url}}/api/users/token
+Accept: application/json
+#salah : c2FsYWg6c2FsYWg=
+#benar : KzYyMTExMTExMTExOnJhaGFzaWE=
+Authorization: Basic KzYyMTExMTExMTExOnJhaGFzaWE=

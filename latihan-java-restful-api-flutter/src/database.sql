@@ -22,3 +22,5 @@ CREATE TABLE m_user (
 -- drop table m_user;
 
 select * from m_user;
+
+alter table m_user modify token varchar(500);

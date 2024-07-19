@@ -23,7 +23,7 @@ RESPONSE
 }
 ```
 
-### Login
+### ~~Login~~ (Deprecated)
 
 POST /api/auth/login
 
@@ -50,7 +50,7 @@ RESPONSE
 
 GET /api/users/current
 
-Header : X-API-TOKEN
+Header : ~~X-API-TOKEN~~, Authorization Bearer {Token UUID}
 
 RESPONSE
 
@@ -67,4 +67,20 @@ RESPONSE
             }
 }
 ```
-	
+
+### Get Token
+
+GET /api/users/token
+
+Header : Authorization Basic {Encode64}
+
+RESPONSE :
+
+```json
+{
+    "data": {
+                "token":"TOKEN",
+                "expiredAt": 121212121212 // milliseconds
+            }
+}
+```

@@ -1,15 +1,21 @@
 package com.latihan.java.restfulapi.flutter.controller;
 
 import com.latihan.java.restfulapi.flutter.dto.request.CreateUserRequest;
+import com.latihan.java.restfulapi.flutter.dto.response.TokenResponse;
 import com.latihan.java.restfulapi.flutter.dto.response.UserResponse;
 import com.latihan.java.restfulapi.flutter.dto.response.WebResponse;
+import com.latihan.java.restfulapi.flutter.model.User;
+import com.latihan.java.restfulapi.flutter.model.UserPrincipal;
 import com.latihan.java.restfulapi.flutter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 public class UserController {
@@ -23,8 +29,13 @@ public class UserController {
     }
 
     @GetMapping(path = "/api/users/current", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponse<UserResponse> get(){
+    public WebResponse<UserResponse> get() {
         return service.get();
+    }
+
+    @GetMapping(path = "/api/users/token", produces = MediaType.APPLICATION_JSON_VALUE)
+    public WebResponse<TokenResponse> token() {
+        return service.token();
     }
 
 }

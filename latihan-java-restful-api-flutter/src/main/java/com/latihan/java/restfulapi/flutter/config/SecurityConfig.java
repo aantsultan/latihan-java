@@ -5,12 +5,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.ProviderManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
@@ -23,34 +19,25 @@ public class SecurityConfig {
     private FilterCustom filterCustom;
 
     @Autowired
-    private DeniedHandlerCustom deniedHandlerCustom;
-
-    @Autowired
     private EntryPointCustom entryPointCustom;
 
-    @Autowired
-    @Qualifier("userDetailsService")
-    private UserDetailsService userDetailsService;
-
-
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http,
+                                           @Qualifier("authenticationManagerCustom") AuthenticationManager authenticationManager)
+            throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests(auth -> {
                     auth.mvcMatchers(WHITELIST_URL).permitAll();
                     auth.anyRequest().authenticated();
                 })
+                .httpBasic()
+                .and()
                 .exceptionHandling().authenticationEntryPoint(entryPointCustom)
                 .and()
-                .addFilterAfter(filterCustom, BasicAuthenticationFilter.class);
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authenticationManager(authenticationManager)
+                .addFilterBefore(filterCustom, BasicAuthenticationFilter.class);
         return http.build();
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManagerCustom(PasswordEncoder passwordEncoder) {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(userDetailsService);
-        authenticationProvider.setPasswordEncoder(passwordEncoder);
-        return new ProviderManager(authenticationProvider);
     }
 }
