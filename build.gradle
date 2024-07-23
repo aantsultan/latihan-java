@@ -104,6 +104,7 @@ project ('latihan-java-spring-jpa-datatable') {
 project ('latihan-java-spring-oauth2') {
 	apply plugin: 'org.springframework.boot'
 	dependencies {
+		implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server:' + springOauth2ResourceServerVersion
 		implementation project(':common')
 		compileOnly 'org.projectlombok:lombok:' + lombokVersion
 		annotationProcessor 'org.projectlombok:lombok:' + lombokVersion

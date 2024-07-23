@@ -1,0 +1,13 @@
+### GET TOKEN
+POST {{url}}/realms/latihan-java-spring-oauth2/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type = authorization_code &
+client_id = latihan-client-id &
+client_secret = W3xgxK6b5tGV2Kvuu4jsI9BONj9gHK7s &
+code = 25be668e-8c1d-4327-acb4-a44faec4b86d.34379b9d-11e7-4ec1-8d59-57961aa99f76.3e64e0f9-4bc5-483d-a63e-1021e07d2fda &
+redirect_uri = http://localhost:8083/callback
+#scope = openid profile
+
+### GET CODE
+GET {{url}}/realms/latihan-java-spring-oauth2/protocol/openid-connect/auth?client_id={{client_id}}&response_type={{response_type}}&scope={{scope}}&redirect_uri={{redirect_uri}}&state={{state}}
