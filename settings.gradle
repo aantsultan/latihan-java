@@ -30,5 +30,6 @@ include 'latihan-java-oop'
 include 'latihan-java-datastructure-list'
 include 'latihan-java-monitoring'
 include 'latihan-java-restful-api-flutter'
+include 'latihan-java-spring-security-form'
 
 include 'common'

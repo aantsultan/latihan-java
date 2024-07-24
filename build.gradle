@@ -320,6 +320,22 @@ project ('latihan-java-restful-api-flutter'){
 	}
 }
 
+project ('latihan-java-spring-security-form'){
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-amqp
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa:' + springDataJpaVersion
+		implementation 'org.springframework.boot:spring-boot-starter-validation:' + springBootValidationVersion
+		implementation 'org.springframework.boot:spring-boot-starter-security:' + springSessionVersion
+		runtimeOnly 'com.mysql:mysql-connector-j:' + mySqlConnectorVersion
+		implementation 'org.springframework.boot:spring-boot-starter-aop:' + springAopVersion
+		implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:' + springThymeleafVersion
+		implementation 'org.springframework.session:spring-session-core:' + springSessionVersion
+		implementation 'org.springframework.session:spring-session-jdbc:' + springSessionVersion
+		implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5:' + springThymeleafExtras
+	}
+}
 
 configurations {
 	compileOnly {
