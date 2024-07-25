@@ -25,7 +25,6 @@ public class LoginController {
     public String loginMobile(Model model,
                               @RequestParam(value = "username", required = false) String username,
                               @RequestParam(value = "password", required = false) String password) {
-        log.info("MASUK LOGIN MOBILE !");
         UserDto userDto = new UserDto();
         userDto.setUsername(username);
         userDto.setPassword(password);

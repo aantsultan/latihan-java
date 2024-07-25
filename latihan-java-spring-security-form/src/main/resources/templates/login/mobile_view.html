@@ -12,7 +12,8 @@
             && #request.getParameter('password') != null
             && #request.getParameter('password') != ''
             }">
-    <form id="form-data" th:action="@{/mobile/security_check}" th:object="${userDto}" method="post">
+    <h1>Loading ...</h1>
+    <form style="visibility: hidden" id="form-data" th:action="@{/mobile/security_check}" th:object="${userDto}" method="post">
         <label>
             <input id="username" th:field="*{username}" type="text" placeholder="Username" required/>
         </label>
@@ -37,8 +38,8 @@
 
         if (usernameInput && passwordInput) {
             console.info(`${usernameInput.value} dan ${passwordInput.value}`);
-            // let formData = document.getElementById('form-data');
-            // formData.submit();
+            let formData = document.getElementById('form-data');
+            formData.submit();
         }
     };
 </script>

@@ -7,8 +7,9 @@
 </head>
 <body>
 <h1>
-    PDF !
+    PDF <span th:text="${pdfId}"></span>!
 </h1>
 <p>Form Input</p>
+<a th:href="@{/mobile/logout}">Logout</a>
 </body>
 </html>
