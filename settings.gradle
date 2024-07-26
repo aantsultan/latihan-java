@@ -32,5 +32,6 @@ include 'latihan-java-monitoring'
 include 'latihan-java-restful-api-flutter'
 include 'latihan-java-spring-security-form'
 include 'latihan-java-spring-soap'
+include 'latihan-java-spring-bc365'
 
 include 'common'

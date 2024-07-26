@@ -401,6 +401,63 @@ project('latihan-java-spring-soap') {
     compileJava.dependsOn genJaxb
 }
 
+project('latihan-java-spring-bc365') {
+
+    configurations {
+        jaxb
+    }
+
+    apply plugin: 'org.springframework.boot'
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+        implementation project(':common')
+        implementation 'org.springframework.boot:spring-boot-starter-parent:' + springBootVersion
+        implementation 'org.springframework.boot:spring-boot-starter-web-services:' + springBootVersion
+        implementation 'wsdl4j:wsdl4j:' + wsdljVersion
+        implementation 'jakarta.xml.bind:jakarta.xml.bind-api:' + xmlBindApiVersion
+        jaxb 'com.sun.xml.bind:jaxb-xjc:' + jaxbXcjVersion
+        jaxb 'com.sun.xml.bind:jaxb-impl:' + jaxbImplVersion
+        jaxb 'javax.xml.bind:jaxb-api:' + jaxbApiVersion
+
+    }
+
+    bootJar {
+        archiveBaseName = 'gs-producing-web-service'
+        archiveVersion =  '0.1.0'
+    }
+
+    sourceSets {
+        main {
+            java {
+                srcDir 'src/main/java'
+                srcDir 'build/generated-sources/jaxb'
+            }
+        }
+    }
+
+    tasks.register('genJaxb') {
+        ext.sourcesDir = "src/main/java"
+        ext.schema = "src/main/resources/xsd/joblist.xsd"
+
+        outputs.dir ext.sourcesDir
+
+        doLast() {
+            project.ant {
+                taskdef name: "xjc", classname: "com.sun.tools.xjc.XJCTask",
+                        classpath: configurations.jaxb.asPath
+                mkdir(dir: ext.sourcesDir)
+
+                xjc(destdir: ext.sourcesDir, schema: schema) {
+                    arg(value: "-wsdl")
+                    produces(dir: ext.sourcesDir, includes: "**/*.java")
+                }
+            }
+        }
+    }
+
+    compileJava.dependsOn genJaxb
+}
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor

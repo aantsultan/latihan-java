@@ -1,0 +1,25 @@
+{
+    "@odata.context": "http://sss-nb23019.ad.sakura-system.co.id:7048/BC160/ODataV4/$metadata#Company('CRONUS%20New%20Zealand%20Ltd.')/Job_List",
+    "value": [
+        {
+            "@odata.etag": "W/\"JzQ0O1JzU0g2ak9BK0tDMURuYThDMS9ueTZIZi9JR29NUFgwVlNoaEwxbHl4bkE9MTswMDsn\"",
+            "No": "TASMANIAN , 8 WP",
+            "Description": "Setting up Eight Work Areas",
+            "Bill_to_Customer_No": "40000",
+            "Status": "Open",
+            "Person_Responsible": "MARY",
+            "Search_Description": "SETTING UP EIGHT WORK AREAS",
+            "Project_Manager": ""
+        },
+        {
+            "@odata.etag": "W/\"JzQ0O2NNWk82VFI5SVo5VEx6NkxtTitkNHNzUDZhT1pUa3kvMmRWcEVETHVuZlk9MTswMDsn\"",
+            "No": "TE ANAU, 10 CR",
+            "Description": "Setting up 10 Conference Rooms",
+            "Bill_to_Customer_No": "50000",
+            "Status": "Open",
+            "Person_Responsible": "MARY",
+            "Search_Description": "SETTING UP 10 CONFERENCE ROOMS",
+            "Project_Manager": ""
+        }
+    ]
+}
