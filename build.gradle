@@ -9,7 +9,6 @@ version = projectVersion
 sourceCompatibility = javaVersion
 
 
-
 allprojects {
     apply plugin: 'java'
     repositories {
@@ -366,7 +365,7 @@ project('latihan-java-spring-soap') {
 
     bootJar {
         archiveBaseName = 'gs-producing-web-service'
-        archiveVersion =  '0.1.0'
+        archiveVersion = '0.1.0'
     }
 
     sourceSets {
@@ -415,6 +414,10 @@ project('latihan-java-spring-bc365') {
         implementation 'org.springframework.boot:spring-boot-starter-web-services:' + springBootVersion
         implementation 'wsdl4j:wsdl4j:' + wsdljVersion
         implementation 'jakarta.xml.bind:jakarta.xml.bind-api:' + xmlBindApiVersion
+        //implementation 'org.apache.httpcomponents.client5:httpclient5:' + apacheHttpComponentClient5Version
+        //implementation 'org.apache.httpcomponents.core5:httpcore5:' + apacheHttpCoreClient5Version
+        implementation 'org.apache.httpcomponents:httpclient:' + apacheHttpClientVersion
+
         jaxb 'com.sun.xml.bind:jaxb-xjc:' + jaxbXcjVersion
         jaxb 'com.sun.xml.bind:jaxb-impl:' + jaxbImplVersion
         jaxb 'javax.xml.bind:jaxb-api:' + jaxbApiVersion
@@ -423,7 +426,7 @@ project('latihan-java-spring-bc365') {
 
     bootJar {
         archiveBaseName = 'gs-producing-web-service'
-        archiveVersion =  '0.1.0'
+        archiveVersion = '0.1.0'
     }
 
     sourceSets {

@@ -1,7 +1,7 @@
 ### GET JOB LIST
-GET {{url}}/ODataV4/Company('CRONUS%20New%20Zealand%20Ltd.')/Job_List?$select=No,Description,Bill_to_Customer_No,Status,Person_Responsible,Search_Description,Project_Manager
-Accept: application/json
-Authorization: Basic {{basicAuth}}
+GET {{url}}/ODataV4/Company('CRONUS New Zealand Ltd.')/Job_List?$select=No,Description,Bill_to_Customer_No,Status,Person_Responsible,Search_Description,Project_Manager
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic {{username}} {{password}}
 
 ### GET META DATA
 GET {{url}}/ODataV4/Company('CRONUS%20New%20Zealand%20Ltd.')/powerbifinance
@@ -17,3 +17,8 @@ Authorization: Basic {{basicAuth}}
 GET {{url}}/ODataV4/Company('CRONUS%20New%20Zealand%20Ltd.')/powerbifinance
 Accept: application/json
 Authorization: Basic {{basicAuth}}
+
+### GET SAMPLE LIST
+GET {{url}}/ODataV4/Company('CRONUS New Zealand Ltd.')/SampleListUser
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic {{username}} {{password}}
