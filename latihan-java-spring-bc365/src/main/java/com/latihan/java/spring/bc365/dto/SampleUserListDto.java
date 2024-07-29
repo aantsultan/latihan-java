@@ -1,24 +1,24 @@
 package com.latihan.java.spring.bc365.dto;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @JsonIgnoreProperties(value = {"odataEtag"})
-public class JobDto {
+public class SampleUserListDto {
 
     private String odataEtag;
-    private String no;
-    private String description;
-    private String billToCustomerNo;
-    private String status;
-    private String personResponsible;
-    private String searchDescription;
-    private String projectManager;
+    private Integer uid;
+    private String email;
+    private String address;
+    private Integer phone;
+    private String ulangTahun;
+
 }

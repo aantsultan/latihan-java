@@ -1,13 +1,13 @@
 package com.latihan.java.spring.bc365.config;
 
+import com.latihan.java.spring.bc365.helper.ApplicationProperties;
+import lombok.RequiredArgsConstructor;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContextBuilder;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -25,25 +25,16 @@ import java.util.List;
 
 
 @Configuration
+@RequiredArgsConstructor
 public class SslConfig {
 
-    @Value("${trust.store}")
-    private Resource trustStore;
-
-    @Value("${trust.store.password}")
-    private String sslPassword;
-
-    @Value("${bc365.web.service.odatav4.username}")
-    private String bc365username;
-
-    @Value("${bc365.web.service.odatav4.password}")
-    private String bc365password;
+    private final ApplicationProperties properties;
 
     @Bean
     public RestTemplate sslRestTemplate() throws IOException, CertificateException, NoSuchAlgorithmException,
             KeyStoreException, KeyManagementException {
         SSLContext sslContext = new SSLContextBuilder()
-                .loadTrustMaterial(trustStore.getURL(), sslPassword.toCharArray()).build();
+                .loadTrustMaterial(properties.getTrustStore().getURL(), properties.getSslPassword().toCharArray()).build();
         SSLConnectionSocketFactory sslConFactory = new SSLConnectionSocketFactory(sslContext);
         CloseableHttpClient httpClient = HttpClients.custom().setSSLSocketFactory(sslConFactory).build();
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
@@ -56,7 +47,7 @@ public class SslConfig {
         List<MediaType> mediaTypes = new ArrayList<>();
         mediaTypes.add(MediaType.APPLICATION_JSON);
         HttpHeaders header = new HttpHeaders();
-        header.setBasicAuth(bc365username, bc365password);
+        header.setBasicAuth(properties.getBc365username(), properties.getBc365password());
         header.setAccept(mediaTypes);
         return new HttpEntity<>(header);
     }

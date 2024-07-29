@@ -1,3 +1,7 @@
 ### GET JOBS
-GET http://localhost:8080/api/jobs
+GET {{url}}/api/jobs
+Accept: application/json
+
+### GET SAMPLE USER LIST
+GET {{url}}/api/sample-user-list
 Accept: application/json

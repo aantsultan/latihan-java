@@ -1,9 +1,10 @@
 package com.latihan.java.spring.bc365.dao;
 
 import com.latihan.java.spring.bc365.model.Job;
+import com.latihan.java.spring.bc365.model.ODataV4;
 
 public interface JobDao {
 
-    Job get();
+    ODataV4<Job> get();
 
 }

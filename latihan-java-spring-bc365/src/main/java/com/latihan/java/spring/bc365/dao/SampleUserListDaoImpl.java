@@ -1,8 +1,8 @@
 package com.latihan.java.spring.bc365.dao;
 
 import com.latihan.java.spring.bc365.helper.ApplicationProperties;
-import com.latihan.java.spring.bc365.model.Job;
 import com.latihan.java.spring.bc365.model.ODataV4;
+import com.latihan.java.spring.bc365.model.SampleUserList;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
@@ -15,9 +15,9 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
 @Repository
-@Slf4j
 @RequiredArgsConstructor
-public class JobDaoImpl implements JobDao {
+@Slf4j
+public class SampleUserListDaoImpl implements SampleUserListDao {
 
     private final RestTemplate sslRestTemplate;
 
@@ -26,11 +26,11 @@ public class JobDaoImpl implements JobDao {
     private final ApplicationProperties properties;
 
     @Override
-    public ODataV4<Job> get() {
+    public ODataV4<SampleUserList> findAll() {
         try {
-            ResponseEntity<ODataV4<Job>> result = sslRestTemplate
-                    .exchange(properties.getBaseUrl() + properties.getJobListUrl(), HttpMethod.GET, sslBc365Json,
-                            new ParameterizedTypeReference<ODataV4<Job>>() {
+            ResponseEntity<ODataV4<SampleUserList>> result = sslRestTemplate
+                    .exchange(properties.getBaseUrl() + properties.getUrlSampleUserList(), HttpMethod.GET, sslBc365Json,
+                            new ParameterizedTypeReference<ODataV4<SampleUserList>>() {
                             });
             return result.getBody();
         } catch (Exception e) {
