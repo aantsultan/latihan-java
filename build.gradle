@@ -461,6 +461,20 @@ project('latihan-java-spring-bc365') {
     compileJava.dependsOn genJaxb
 }
 
+project('latihan-java-spring-ai') {
+    apply plugin: 'org.springframework.boot'
+//    repositories {
+//        maven { url 'https://repo.spring.io/milestone' }
+//        maven { url 'https://repo.spring.io/snapshot' }
+//    }
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+        implementation project(':common')
+//        implementation platform("org.springframework.ai:spring-ai-bom:" + springAiBomVersion)
+//        implementation 'io.springboot.ai:spring-ai-openai:' + springAiOpenAiVersion
+    }
+}
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
