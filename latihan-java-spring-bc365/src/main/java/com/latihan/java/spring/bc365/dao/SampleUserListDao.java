@@ -7,6 +7,11 @@ import com.latihan.java.spring.bc365.model.SampleUserList;
 public interface SampleUserListDao {
 
     ODataV4<SampleUserList> findAll();
+    ODataV4SULResponse findByUid(Integer uid);
 
     ODataV4SULResponse create(SampleUserList request);
+
+    ODataV4SULResponse update(SampleUserList request);
+
+    void delete (SampleUserList request);
 }

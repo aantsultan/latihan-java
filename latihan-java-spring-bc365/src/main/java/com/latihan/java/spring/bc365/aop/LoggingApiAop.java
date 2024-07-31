@@ -6,8 +6,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.UUID;
 
@@ -32,7 +33,7 @@ public class LoggingApiAop {
             return result;
         } catch (Exception e) {
             log.error("{}.{} : RESPONSE [{}] : {}", simpleName, method, uuid, e.getMessage(), e);
-            throw e;
+            throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, e.getMessage());
         }
     }
 

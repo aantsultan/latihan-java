@@ -1,4 +1,4 @@
-package com.latihan.java.spring.bc365.dto;
+package com.latihan.java.spring.bc365.dto.sampleuserlist;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
