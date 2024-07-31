@@ -22,3 +22,16 @@ Authorization: Basic {{basicAuth}}
 GET {{url}}/ODataV4/Company('CRONUS New Zealand Ltd.')/SampleListUser
 Content-Type: application/x-www-form-urlencoded
 Authorization: Basic {{username}} {{password}}
+
+### SAVE SAMPLE LIST
+POST {{url}}/ODataV4/Company('CRONUS New Zealand Ltd.')/SampleListUser
+Content-Type: application/json
+Authorization: Basic {{username}} {{password}}
+
+{
+  "UID": 6,
+  "Email": "test_lagi@mail.com",
+  "Address": "denpasar",
+  "Phone": 54432,
+  "Ulang_Tahun": "1990-1-1"
+}

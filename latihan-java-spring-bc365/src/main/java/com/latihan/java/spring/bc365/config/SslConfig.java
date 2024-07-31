@@ -43,12 +43,23 @@ public class SslConfig {
     }
 
     @Bean
-    public HttpEntity<String> sslBc365Json(){
+    public HttpEntity<String> sslBc365GetJson(){
         List<MediaType> mediaTypes = new ArrayList<>();
         mediaTypes.add(MediaType.APPLICATION_JSON);
         HttpHeaders header = new HttpHeaders();
         header.setBasicAuth(properties.getBc365username(), properties.getBc365password());
         header.setAccept(mediaTypes);
+        return new HttpEntity<>(header);
+    }
+
+    @Bean
+    public HttpEntity<String> sslBc365PostJson(){
+        List<MediaType> mediaTypes = new ArrayList<>();
+        mediaTypes.add(MediaType.APPLICATION_JSON);
+        HttpHeaders header = new HttpHeaders();
+        header.setBasicAuth(properties.getBc365username(), properties.getBc365password());
+        header.setAccept(mediaTypes);
+        header.setContentType(MediaType.APPLICATION_JSON);
         return new HttpEntity<>(header);
     }
 

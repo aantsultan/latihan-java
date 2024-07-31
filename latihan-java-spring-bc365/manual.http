@@ -5,3 +5,16 @@ Accept: application/json
 ### GET SAMPLE USER LIST
 GET {{url}}/api/sample-user-list
 Accept: application/json
+
+### POST SAMPLE USER LIST
+POST {{url}}/api/sample-user-list
+Accept: application/json
+Content-Type: application/json
+
+{
+  "uid": 8,
+  "email": "test_api@mail.com",
+  "address": "makassar",
+  "phone": 80989999,
+  "ulangTahun": "1990-01-01"
+}

@@ -7,4 +7,5 @@ public interface SampleUserListService {
 
     ODataV4Dto<SampleUserListDto> findAll();
 
+    void save(SampleUserListDto request);
 }

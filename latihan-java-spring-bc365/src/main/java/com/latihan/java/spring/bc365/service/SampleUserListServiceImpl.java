@@ -4,9 +4,12 @@ import com.latihan.java.spring.bc365.dao.SampleUserListDao;
 import com.latihan.java.spring.bc365.dto.ODataV4Dto;
 import com.latihan.java.spring.bc365.dto.SampleUserListDto;
 import com.latihan.java.spring.bc365.model.ODataV4;
+import com.latihan.java.spring.bc365.model.ODataV4SULResponse;
 import com.latihan.java.spring.bc365.model.SampleUserList;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,5 +37,20 @@ public class SampleUserListServiceImpl implements SampleUserListService {
                 .odataContext(response.getOdataContext())
                 .value(sampleUserListDtos)
                 .build();
+    }
+
+    @Override
+    public void save(SampleUserListDto request) {
+        SampleUserList sample = new SampleUserList();
+        sample.setUid(request.getUid());
+        sample.setAddress(request.getAddress());
+        sample.setEmail(request.getEmail());
+        sample.setPhone(request.getPhone());
+        sample.setUlangTahun(request.getUlangTahun());
+
+        ODataV4SULResponse result = sampleUserListDao.create(sample);
+        if (result == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Failed to save data Sample User List");
+        }
     }
 }

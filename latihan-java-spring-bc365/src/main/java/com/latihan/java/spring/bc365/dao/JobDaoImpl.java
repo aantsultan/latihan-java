@@ -1,5 +1,6 @@
 package com.latihan.java.spring.bc365.dao;
 
+import com.latihan.java.spring.bc365.aop.LoggingApi;
 import com.latihan.java.spring.bc365.helper.ApplicationProperties;
 import com.latihan.java.spring.bc365.model.Job;
 import com.latihan.java.spring.bc365.model.ODataV4;
@@ -21,15 +22,16 @@ public class JobDaoImpl implements JobDao {
 
     private final RestTemplate sslRestTemplate;
 
-    private final HttpEntity<String> sslBc365Json;
+    private final HttpEntity<String> sslBc365GetJson;
 
     private final ApplicationProperties properties;
 
     @Override
+    @LoggingApi
     public ODataV4<Job> get() {
         try {
             ResponseEntity<ODataV4<Job>> result = sslRestTemplate
-                    .exchange(properties.getBaseUrl() + properties.getJobListUrl(), HttpMethod.GET, sslBc365Json,
+                    .exchange(properties.getBaseUrl() + properties.getJobListUrl(), HttpMethod.GET, sslBc365GetJson,
                             new ParameterizedTypeReference<ODataV4<Job>>() {
                             });
             return result.getBody();
