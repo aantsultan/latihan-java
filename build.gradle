@@ -414,9 +414,9 @@ project('latihan-java-spring-bc365') {
         implementation 'org.springframework.boot:spring-boot-starter-web-services:' + springBootVersion
         implementation 'wsdl4j:wsdl4j:' + wsdljVersion
         implementation 'jakarta.xml.bind:jakarta.xml.bind-api:' + xmlBindApiVersion
-        //implementation 'org.apache.httpcomponents.client5:httpclient5:' + apacheHttpComponentClient5Version
-        //implementation 'org.apache.httpcomponents.core5:httpcore5:' + apacheHttpCoreClient5Version
         implementation 'org.apache.httpcomponents:httpclient:' + apacheHttpClientVersion
+        implementation 'org.springframework.boot:spring-boot-starter-aop:' + springAopVersion
+        implementation 'org.springframework.boot:spring-boot-starter-validation:' + springBootValidationVersion
 
         jaxb 'com.sun.xml.bind:jaxb-xjc:' + jaxbXcjVersion
         jaxb 'com.sun.xml.bind:jaxb-impl:' + jaxbImplVersion

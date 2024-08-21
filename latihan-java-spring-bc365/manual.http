@@ -2,6 +2,39 @@
 GET {{url}}/api/jobs
 Accept: application/json
 
-### GET SAMPLE USER LIST
+### GET ALL SAMPLE USER LIST
 GET {{url}}/api/sample-user-list
+Accept: application/json
+
+### CREATE SAMPLE USER LIST
+POST {{url}}/api/sample-user-list
+Accept: application/json
+Content-Type: application/json
+
+{
+  "uid": 6,
+  "email": "test6@mail.com",
+  "address": "samarinda",
+  "phone": 6666666,
+  "ulangTahun": "1990-01-01"
+}
+
+### GET SAMPLE USER LIST BY UID
+GET {{url}}/api/sample-user-list/6
+Accept: application/json
+
+### UPDATE SAMPLE USER LIST
+PATCH {{url}}/api/sample-user-list/8
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "test_api_EDIT@mail.com",
+  "address": "makassar EDIT",
+  "phone": 80989999,
+  "ulangTahun": "1990-01-01"
+}
+
+### GET SAMPLE USER LIST BY UID
+DELETE {{url}}/api/sample-user-list/6
 Accept: application/json

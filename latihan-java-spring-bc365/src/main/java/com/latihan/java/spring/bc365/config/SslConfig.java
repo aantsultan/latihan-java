@@ -8,10 +8,8 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
 import javax.net.ssl.SSLContext;
@@ -20,8 +18,6 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Configuration
@@ -29,6 +25,7 @@ import java.util.List;
 public class SslConfig {
 
     private final ApplicationProperties properties;
+    private final ResponseErrorHandler responseErrorHandler;
 
     @Bean
     public RestTemplate sslRestTemplate() throws IOException, CertificateException, NoSuchAlgorithmException,
@@ -39,17 +36,9 @@ public class SslConfig {
         CloseableHttpClient httpClient = HttpClients.custom().setSSLSocketFactory(sslConFactory).build();
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
         requestFactory.setHttpClient(httpClient);
-        return new RestTemplate(requestFactory);
-    }
-
-    @Bean
-    public HttpEntity<String> sslBc365Json(){
-        List<MediaType> mediaTypes = new ArrayList<>();
-        mediaTypes.add(MediaType.APPLICATION_JSON);
-        HttpHeaders header = new HttpHeaders();
-        header.setBasicAuth(properties.getBc365username(), properties.getBc365password());
-        header.setAccept(mediaTypes);
-        return new HttpEntity<>(header);
+        RestTemplate restTemplate = new RestTemplate(requestFactory);
+        restTemplate.setErrorHandler(responseErrorHandler);
+        return restTemplate;
     }
 
 }

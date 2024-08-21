@@ -22,3 +22,37 @@ Authorization: Basic {{basicAuth}}
 GET {{url}}/ODataV4/Company('CRONUS New Zealand Ltd.')/SampleListUser
 Content-Type: application/x-www-form-urlencoded
 Authorization: Basic {{username}} {{password}}
+
+### SAVE SAMPLE LIST
+POST {{url}}/ODataV4/Company('CRONUS New Zealand Ltd.')/SampleListUser
+Content-Type: application/json
+Authorization: Basic {{username}} {{password}}
+
+{
+  "UID": 6,
+  "Email": "test_lagi@mail.com",
+  "Address": "denpasar",
+  "Phone": 54432,
+  "Ulang_Tahun": "1990-1-1"
+}
+
+### GET SAMPLE LIST BY UID
+GET {{url}}/ODataV4/Company('CRONUS New Zealand Ltd.')/SampleListUser(UID=6)
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic {{username}} {{password}}
+
+### UPDATE SAMPLE LIST
+PATCH {{url}}/ODataV4/Company('CRONUS New Zealand Ltd.')/SampleListUser(UID=6)
+Content-Type: application/json
+If-Match: W/"JzQ0O1V4OUZEWDFZUTJ6d3BVY2wxTGdVQUpaRStOYTA3V29kblBUUUpYNVphU2M9MTswMDsn"
+Authorization: Basic {{username}} {{password}}
+
+{
+  "Address": "denpasar EDIT LAGI"
+}
+
+### DELETE SAMPLE LIST
+DELETE {{url}}/ODataV4/Company('CRONUS New Zealand Ltd.')/SampleListUser(UID=6)
+Content-Type: application/json
+If-Match: W/"JzQ0O3VIbERHRTRSV2hWbFEwRm8xeU8vWjBKNUVIbGZwZ3NGTWFEVHh3OHBhVkk9MTswMDsn"
+Authorization: Basic {{username}} {{password}}

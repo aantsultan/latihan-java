@@ -1,6 +1,7 @@
 package com.latihan.java.spring.bc365.controller;
 
 import com.latihan.java.spring.bc365.dto.WebResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -8,14 +9,17 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.ConstraintViolationException;
+
 @RestControllerAdvice
+@Slf4j
 public class ErrorController {
 
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<WebResponse<String>> response(ResponseStatusException exception) {
         return ResponseEntity.status(exception.getRawStatusCode())
                 .body(WebResponse.<String>builder()
-                        .errors(exception.getMessage())
+                        .errors(exception.getReason())
                         .build());
     }
 
@@ -25,6 +29,12 @@ public class ErrorController {
                 .body(WebResponse.<String>builder()
                         .errors(exception.getMessage())
                         .build());
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<WebResponse<String>> constraintViolationException(ConstraintViolationException exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(WebResponse.<String>builder().errors(exception.getMessage()).build());
     }
 
 }
