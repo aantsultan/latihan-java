@@ -475,6 +475,21 @@ project('latihan-java-spring-ai') {
     }
 }
 
+project('latihan-java-spring-jasperreport') {
+    apply plugin: 'org.springframework.boot'
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+        implementation project(':common')
+        runtimeOnly 'com.mysql:mysql-connector-j:' + mySqlConnectorVersion
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa:' + springDataJpaVersion
+        implementation('net.sf.jasperreports:jasperreports:' + jasperReportVersion) {
+            exclude group: 'com.lowagie', module: 'itext'
+        }
+        compileOnly 'com.lowagie:itext:' + itextVersion
+
+    }
+}
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor

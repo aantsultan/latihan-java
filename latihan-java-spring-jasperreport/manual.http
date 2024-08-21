@@ -1,0 +1,42 @@
+### CREATE USER
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "name": "Rahmanya"
+}
+
+### GET USERS
+GET http://localhost:8080/users
+Accept: application/json
+
+### GENERATE PDF
+GET http://localhost:8080/users/pdf
+Accept: application/pdf
+
+### GENERATE EXCEL
+GET http://localhost:8080/users/excel
+Accept: application/vnd.ms-excel
+
+### CREATE WEAVING SIZING
+POST http://localhost:8080/sizing
+Content-Type: application/json
+
+{
+  "bulanTahun": "Februari-2023",
+  "tanggal": "1-Feb-23",
+  "jenisSetKain": "NKB0369MIN",
+  "jenisKain": "NK14582",
+  "noBenang": "NP40",
+  "beamKe" : 1,
+  "noBeam": "2312",
+  "jumlahPcsPerBeam": 99
+}
+
+### GET WEAVING SIZING
+GET http://localhost:8080/sizing
+Accept: application/json
+
+### GENERATE EXCEL WEAVING SIZING
+GET http://localhost:8080/sizing/excel
+Accept: application/vnd.ms-excel
