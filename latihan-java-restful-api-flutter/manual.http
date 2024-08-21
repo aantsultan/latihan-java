@@ -37,3 +37,7 @@ Accept: application/json
 #salah : c2FsYWg6c2FsYWg=
 #benar : KzYyMTExMTExMTExOnJhaGFzaWE=
 Authorization: Basic KzYyMTExMTExMTExOnJhaGFzaWE=
+
+### GET CAT
+GET {{url}}/api/cat
+Content-Type: application/json

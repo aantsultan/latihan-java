@@ -2,7 +2,7 @@ package com.latihan.java.restfulapi.flutter.helper;
 
 public class WebConstant {
 
-    public static final String[] WHITELIST_URL = {"/api/users"};
+    public static final String[] WHITELIST_URL = {"/api/users", "/api/cat"};
     public static final long EXPIRE_TIME = System.currentTimeMillis() + (1000L * 60 * 60 * 24 * 30);
 
     public static final String TOKEN_PREFIX = "Bearer ";
