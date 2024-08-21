@@ -1,0 +1,3 @@
+### GET PDF DIRECT
+GET http://localhost:8080/app-web/mobile/login?username=test&password=test&pdfId=PDF1
+Accept: text/html
