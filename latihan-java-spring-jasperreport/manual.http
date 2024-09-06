@@ -41,6 +41,10 @@ Accept: application/json
 GET http://localhost:8080/sizing/excel
 Accept: application/vnd.ms-excel
 
-### GENERATE EXCEL M STOP LAPORAN KERJA
-GET http://localhost:8080/mstop/laporan-kerja/excel
+### GENERATE EXCEL M STOP LAPORAN KERJA USING SUBREPORT
+GET http://localhost:8080/mstop/laporan-kerja/excel-subreport
+Accept: application/vnd.ms-excel
+
+### GENERATE EXCEL M STOP LAPORAN KERJA USING TABLE
+GET http://localhost:8080/mstop/laporan-kerja/excel-table
 Accept: application/vnd.ms-excel

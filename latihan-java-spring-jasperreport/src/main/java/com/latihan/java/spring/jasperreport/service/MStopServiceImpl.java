@@ -34,7 +34,7 @@ public class MStopServiceImpl implements MStopService {
 
     @Override
     @SneakyThrows
-    public Resource generateExcel() {
+    public Resource generateExcelUsingSubReport() {
         List<WeavingSizing> result = weavingSizingRepository.findAll();
 
         @Cleanup InputStream reportStream = resourceLoader
@@ -51,6 +51,42 @@ public class MStopServiceImpl implements MStopService {
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("dataSource", dataSource);
         parameters.put("jasperSubReport", jasperSubReport);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, new JREmptyDataSource());
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        SimpleXlsxReportConfiguration configuration = new SimpleXlsxReportConfiguration();
+        configuration.setSheetNames(new String[]{"report"});
+        configuration.setOnePagePerSheet(true);
+        configuration.setRemoveEmptySpaceBetweenRows(true);
+        configuration.setRemoveEmptySpaceBetweenColumns(true);
+        configuration.setWhitePageBackground(false);
+        configuration.setIgnoreGraphics(false);
+        configuration.setFontSizeFixEnabled(false);
+
+        JRXlsxExporter exporter = new JRXlsxExporter();
+        exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+        exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(baos));
+        exporter.setConfiguration(configuration);
+        exporter.exportReport();
+
+        byte[] bytes = baos.toByteArray();
+        InputStream inputStream = new ByteArrayInputStream(bytes);
+        return new InputStreamResource(inputStream);
+    }
+
+    @Override
+    @SneakyThrows
+    public Resource generateExcelUsingTable() {
+        List<WeavingSizing> result = weavingSizingRepository.findAll();
+
+        @Cleanup InputStream reportStream = resourceLoader
+                .getResource(applicationProperties.getReportPath() + "m-stop-table.jrxml")
+                .getInputStream();
+        JasperReport jasperReport = JasperCompileManager.compileReport(reportStream);
+
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(result);
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("dataSource", dataSource);
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, new JREmptyDataSource());
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 

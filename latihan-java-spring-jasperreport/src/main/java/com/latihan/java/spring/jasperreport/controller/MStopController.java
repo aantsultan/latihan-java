@@ -18,11 +18,21 @@ public class MStopController {
 
     private final MStopService mStopService;
 
-    @GetMapping(path = "/laporan-kerja/excel")
-    public ResponseEntity<Resource> excel() {
-        Resource result = mStopService.generateExcel();
+    @GetMapping(path = "/laporan-kerja/excel-subreport")
+    public ResponseEntity<Resource> excelSubReport() {
+        Resource result = mStopService.generateExcelUsingSubReport();
         return ResponseEntity.ok()
-                .header(CONTENT_DISPOSITION, "attachment; filename=" + "user_report"
+                .header(CONTENT_DISPOSITION, "attachment; filename=" + "user_report_subreport_"
+                        + System.currentTimeMillis() + ".xlsx")
+                .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
+                .body(result);
+    }
+
+    @GetMapping(path = "/laporan-kerja/excel-table")
+    public ResponseEntity<Resource> excelTable() {
+        Resource result = mStopService.generateExcelUsingTable();
+        return ResponseEntity.ok()
+                .header(CONTENT_DISPOSITION, "attachment; filename=" + "user_report_table_"
                         + System.currentTimeMillis() + ".xlsx")
                 .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
                 .body(result);
