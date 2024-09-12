@@ -1,0 +1,20 @@
+### SAVE USER
+POST http://localhost:8080/user
+Content-Type: application/json
+
+{
+  "name": "aant",
+  "profile": {
+    "address1": {
+      "country" : "indonesia",
+      "name": "Hotel Jakarta"
+    },
+    "address2": {
+      "country" : "jepang",
+      "name": "Hotel Kyoto"
+    }
+  }
+}
+
+### FIND ALL USER
+GET http://localhost:8080/user

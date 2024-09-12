@@ -490,6 +490,17 @@ project('latihan-java-spring-jasperreport') {
     }
 }
 
+project('latihan-java-spring-postgresql-jsonb') {
+    apply plugin: 'org.springframework.boot'
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+        implementation project(':common')
+        implementation 'org.postgresql:postgresql:' + postgresqlJdbcVersion
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa:' + springDataJpaVersion
+        implementation 'io.hypersistence:hypersistence-utils-hibernate-55:' + hypersistenceUtilsHibernateVersion
+    }
+}
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
