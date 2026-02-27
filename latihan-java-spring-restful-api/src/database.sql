@@ -25,7 +25,7 @@ CREATE TABLE contacts
     phone      VARCHAR(100),
     email      VARCHAR(100),
     PRIMARY KEY (id),
-    FOREIGN KEY fk_users_contacts (username) REFERENCES users (username)
+    CONSTRAINT fk_customer FOREIGN KEY fk_users_contacts (username) REFERENCES users (username)
 ) ENGINE InnoDB;
 
 select *

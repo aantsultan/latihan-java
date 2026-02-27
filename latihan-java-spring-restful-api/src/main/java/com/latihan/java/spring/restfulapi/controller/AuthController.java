@@ -5,6 +5,7 @@ import com.latihan.java.spring.restfulapi.model.LoginUserRequest;
 import com.latihan.java.spring.restfulapi.model.TokenResponse;
 import com.latihan.java.spring.restfulapi.model.WebResponse;
 import com.latihan.java.spring.restfulapi.service.AuthService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 public class AuthController {
 
@@ -29,6 +31,7 @@ public class AuthController {
     )
     public WebResponse<TokenResponse> login(@RequestBody LoginUserRequest request){
         TokenResponse tokenResponse = service.login(request);
+        log.info("Login {} success !", request.getUsername());
         return WebResponse.<TokenResponse>builder().data(tokenResponse).build();
     }
 
