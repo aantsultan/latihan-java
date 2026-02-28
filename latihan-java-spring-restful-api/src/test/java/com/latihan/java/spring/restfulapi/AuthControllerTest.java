@@ -6,6 +6,8 @@ import com.latihan.java.spring.restfulapi.entity.User;
 import com.latihan.java.spring.restfulapi.model.LoginUserRequest;
 import com.latihan.java.spring.restfulapi.model.TokenResponse;
 import com.latihan.java.spring.restfulapi.model.WebResponse;
+import com.latihan.java.spring.restfulapi.repository.AddressRepository;
+import com.latihan.java.spring.restfulapi.repository.ContactRepository;
 import com.latihan.java.spring.restfulapi.repository.UserRepository;
 import com.latihan.java.spring.restfulapi.security.BCrypt;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +17,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -32,10 +37,18 @@ class AuthControllerTest {
     private UserRepository userRepository;
 
     @Autowired
+    private AddressRepository addressRepository;
+
+    @Autowired
+    private ContactRepository contactRepository;
+
+    @Autowired
     private ObjectMapper objectMapper;
 
     @BeforeEach
     void setUp() {
+        addressRepository.deleteAll();
+        contactRepository.deleteAll();
         userRepository.deleteAll();
     }
 

@@ -32,12 +32,12 @@ class LinkedListTest {
     }
 
     @Test
-    void printList_RemoveLast_ContaintElement() {
+    void printList_RemoveLast_ContaintsElement() {
         LinkedList myLinkedList = new LinkedList(1);
         myLinkedList.append(2);
         myLinkedList.append(3);
         myLinkedList.append(4);
-        myLinkedList.removeLast();
+        System.out.println("Removed : " + myLinkedList.removeLast().value);
         myLinkedList.printList();
     }
 }

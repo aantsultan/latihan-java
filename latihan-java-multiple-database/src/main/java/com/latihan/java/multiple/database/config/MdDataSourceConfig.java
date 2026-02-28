@@ -1,5 +1,6 @@
 package com.latihan.java.multiple.database.config;
 
+import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -16,7 +17,6 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.HashMap;
 
@@ -35,14 +35,12 @@ public class MdDataSourceConfig {
         this.environment = environment;
     }
 
-    @Primary
     @Bean(name = "mdDataSource")
     @ConfigurationProperties(prefix = "spring.datasource-md")
     public DataSource mdDataSource() {
         return DataSourceBuilder.create().build();
     }
 
-    @Primary
     @Bean(name = "mdEntityManagerFactory")
     public LocalContainerEntityManagerFactoryBean mdEntityManagerFactory(@Qualifier("mdDataSource") DataSource dataSource
     ) {
@@ -62,7 +60,6 @@ public class MdDataSourceConfig {
         return em;
     }
 
-    @Primary
     @Bean(name = "mdTransactionManager")
     public PlatformTransactionManager mdTransactionManager(@Qualifier("mdEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);

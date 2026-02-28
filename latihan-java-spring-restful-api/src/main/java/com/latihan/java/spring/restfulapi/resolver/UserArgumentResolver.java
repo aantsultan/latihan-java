@@ -2,6 +2,7 @@ package com.latihan.java.spring.restfulapi.resolver;
 
 import com.latihan.java.spring.restfulapi.entity.User;
 import com.latihan.java.spring.restfulapi.repository.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,6 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.servlet.http.HttpServletRequest;
 
 @Component
 public class UserArgumentResolver implements HandlerMethodArgumentResolver {

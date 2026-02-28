@@ -7,6 +7,7 @@ import com.latihan.java.spring.restfulapi.model.CreateContactRequest;
 import com.latihan.java.spring.restfulapi.model.SearchContactRequest;
 import com.latihan.java.spring.restfulapi.model.UpdateContactRequest;
 import com.latihan.java.spring.restfulapi.repository.ContactRepository;
+import jakarta.persistence.criteria.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -18,7 +19,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

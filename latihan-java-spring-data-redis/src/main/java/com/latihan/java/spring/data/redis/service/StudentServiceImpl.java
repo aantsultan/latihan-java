@@ -4,6 +4,7 @@ import com.latihan.java.spring.data.redis.dto.ResponseDto;
 import com.latihan.java.spring.data.redis.dto.StudentDto;
 import com.latihan.java.spring.data.redis.model.Student;
 import com.latihan.java.spring.data.redis.repository.StudentRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
@@ -15,14 +16,10 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
+@RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository repository;
-
-    @Autowired
-    public StudentServiceImpl(StudentRepository repository) {
-        this.repository = repository;
-    }
 
     @Override
     public ResponseEntity<ResponseDto> get() {

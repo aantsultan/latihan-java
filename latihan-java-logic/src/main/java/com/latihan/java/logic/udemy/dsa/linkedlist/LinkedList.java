@@ -2,9 +2,9 @@ package com.latihan.java.logic.udemy.dsa.linkedlist;
 
 public class LinkedList {
 
-    class Node {
-        int value;
-        Node next;
+    public class Node {
+        public int value;
+        public Node next;
 
         Node(int value) {
             this.value = value;
@@ -43,19 +43,23 @@ public class LinkedList {
     }
 
     public Node removeLast(){
-        if(length <= 1){
-            tail = null;
-        } else {
-            Node temp = head;
-            Node pre = head;
-            while (temp.next != null) {
-                pre = temp;
-                temp = temp.next;
-            }
-            tail = pre;
-            tail.next = null;
+        if(length == 0){
+            return null;
         }
-        return tail;
+        Node temp = head;
+        Node pre = head;
+        while (temp.next != null) {
+            pre = temp;
+            temp = temp.next;
+        }
+        tail = pre;
+        tail.next = null;
+        length --;
+        if (length == 0){
+            head = null;
+            tail = null;
+        }
+        return temp;
     }
 
     public void printList() {

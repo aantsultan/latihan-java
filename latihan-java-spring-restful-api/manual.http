@@ -24,13 +24,13 @@ Content-Type: application/json
 ### GET USER
 GET http://localhost:8080/api/users/current
 Accept: application/json
-X-API-TOKEN: d0b88dff-492c-443f-b932-d854e42515d6
+X-API-TOKEN: 3575cf0a-3604-4524-8726-144b9b17bcf0
 
 ### UPDATE USER
 PATCH http://localhost:8080/api/users/current
 Accept: application/json
 Content-Type: application/json
-X-API-TOKEN: d0b88dff-492c-443f-b932-d854e42515d6
+X-API-TOKEN: 3575cf0a-3604-4524-8726-144b9b17bcf0
 
 {
   "name": "A-Ant Sultan R"

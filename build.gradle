@@ -131,28 +131,28 @@ project('latihan-java-spring-mongodb') {
     }
 }
 
-project('latihan-java-atomikos') {
-    apply plugin: 'org.springframework.boot'
-    dependencies {
-        implementation project(':common')
-        implementation 'org.springframework.boot:spring-boot-starter-data-jpa:' + springDataJpaVersion
-        implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
-        implementation 'com.microsoft.sqlserver:mssql-jdbc:' + sqlJdbcVersion
-        implementation 'org.postgresql:postgresql:' + postgresqlJdbcVersion
-        implementation 'com.atomikos:transactions-jdbc:' + atomikosJdbcVersion
-        implementation 'com.atomikos:transactions-jms:' + atomikosJmsVersion
-    }
+project ('latihan-java-atomikos') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa:' + springDataJpaVersion
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+		implementation 'com.microsoft.sqlserver:mssql-jdbc:' + sqlJdbcVersion
+		implementation 'org.postgresql:postgresql:' + postgresqlJdbcVersion
+		implementation 'com.atomikos:transactions-jdbc:' + atomikosJdbcVersion
+		implementation 'com.atomikos:transactions-jms:' + atomikosJmsVersion
+	}
 }
 
-project('latihan-java-multiple-database') {
-    apply plugin: 'org.springframework.boot'
-    dependencies {
-        implementation project(':common')
-        implementation 'org.springframework.boot:spring-boot-starter-data-jpa:' + springDataJpaVersion
-        implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
-        implementation 'com.microsoft.sqlserver:mssql-jdbc:' + sqlJdbcVersion
-        implementation 'org.postgresql:postgresql:' + postgresqlJdbcVersion
-    }
+project ('latihan-java-multiple-database') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa:' + springDataJpaVersion
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion
+		implementation 'com.microsoft.sqlserver:mssql-jdbc:' + sqlJdbcVersion
+		implementation 'org.postgresql:postgresql:' + postgresqlJdbcVersion
+	}
 }
 
 project('latihan-java-spring-aop') {
@@ -505,6 +505,23 @@ project('latihan-java-spring-postgresql-jsonb') {
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa:' + springDataJpaVersion
         implementation 'io.hypersistence:hypersistence-utils-hibernate-55:' + hypersistenceUtilsHibernateVersion
     }
+}
+
+project ('latihan-java-spring-custom') {
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+	}
+}
+
+project ('latihan-java-spring-oracle'){
+	apply plugin: 'org.springframework.boot'
+	dependencies {
+		implementation project(':common')
+		implementation 'org.springframework.boot:spring-boot-starter-web:' + springWebVersion// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-amqp
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa:' + springDataJpaVersion
+//		implementation 'com.oracle.database.jdbc:ojdbc11:' + oracleJdbc11Version
+	}
 }
 
 configurations {

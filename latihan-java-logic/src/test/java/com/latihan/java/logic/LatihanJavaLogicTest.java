@@ -1,5 +1,8 @@
 package com.latihan.java.logic;
 
+import com.latihan.java.logic.oop.EmployeeUserServiceImpl;
+import com.latihan.java.logic.oop.model.Employee;
+import com.latihan.java.logic.oop.model.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -93,7 +96,35 @@ public class LatihanJavaLogicTest {
     }
 
     @Test
-    void generateTime(){
+    void oop(){
+        User user = new User();
+        String name = user.name();
+        Assertions.assertEquals("User", name);
 
+        User empoyee = new Employee();
+        String employeeName = empoyee.name();
+        Assertions.assertEquals("User", employeeName);
+
+        Employee employee = new Employee();
+        String name1 = employee.name();
+        Assertions.assertEquals("Employee", name1);
+
+//        String name2 = (User)employee.name(); error
+        String name2 = ((User)employee).name();
+        Assertions.assertEquals("User", name2);
+    }
+
+    @Test
+    void oop2(){
+        User user = new Employee();
+        String phone = user.phone();
+        Assertions.assertEquals("EmployeePhone", phone);
+    }
+
+    @Test
+    void oop3() throws Exception {
+        EmployeeUserServiceImpl impl = new EmployeeUserServiceImpl();
+        String s = impl.userName();
+        Assertions.assertEquals("EmployeeUser", s);
     }
 }

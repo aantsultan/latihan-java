@@ -1,0 +1,20 @@
+-- CREATE SEQUENCE user_seq START WITH 1;
+--
+-- CREATE TABLE M_USER (
+--	user_id NUMBER (10) DEFAULT user_seq.nextval NOT NULL,
+--	name varchar (200) NULL,
+--	created_date timestamp NOT NULL,
+--	created_by NUMBER (10) NOT NULL,
+--
+--	PRIMARY KEY (user_id)
+-- )
+--
+SELECT * FROM m_user;
+SELECT * FROM USER_TS_QUOTAS;
+
+-- schema PDBADMIN -> username PDBADMIN
+-- alter user PDBADMIN quota 5G on USERS;
+
+select username,tablespace_name,bytes/1024/1024/1024, MAX_BYTES/1024/1024/1024 from dba_ts_quotas;
+alter user PDBADMIN indentified by root;
+select sys_context('USERENV', 'CURRENT_SCHEMA') from dual;

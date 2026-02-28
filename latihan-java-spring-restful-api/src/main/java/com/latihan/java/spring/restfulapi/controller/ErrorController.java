@@ -1,13 +1,13 @@
 package com.latihan.java.spring.restfulapi.controller;
 
 import com.latihan.java.spring.restfulapi.model.WebResponse;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.validation.ConstraintViolationException;
 
 @RestControllerAdvice
 public class ErrorController {
@@ -20,7 +20,7 @@ public class ErrorController {
 
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<WebResponse<String>> apiException(ResponseStatusException exception) {
-        return ResponseEntity.status(exception.getRawStatusCode())
+        return ResponseEntity.status(exception.getStatusCode())
                 .body(WebResponse.<String>builder().errors(exception.getMessage()).build());
     }
 }

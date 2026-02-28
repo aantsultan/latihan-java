@@ -8,15 +8,19 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.keyvalue.annotation.KeySpace;
 import org.springframework.data.redis.core.TimeToLive;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @KeySpace("products")
 public class Product implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -8406220782228402757L;
 
     @Id
     private String id;

@@ -7,8 +7,8 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-@Service
 @Slf4j
+@Service
 public class ProductServiceImpl implements ProductService{
 
     @Cacheable(value = "products", key = "#id")

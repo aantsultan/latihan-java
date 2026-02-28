@@ -7,6 +7,8 @@ import com.latihan.java.spring.restfulapi.model.RegisterUserRequest;
 import com.latihan.java.spring.restfulapi.model.UpdateUserRequest;
 import com.latihan.java.spring.restfulapi.model.UserResponse;
 import com.latihan.java.spring.restfulapi.model.WebResponse;
+import com.latihan.java.spring.restfulapi.repository.AddressRepository;
+import com.latihan.java.spring.restfulapi.repository.ContactRepository;
 import com.latihan.java.spring.restfulapi.repository.UserRepository;
 import com.latihan.java.spring.restfulapi.security.BCrypt;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,10 +34,18 @@ class UserControllerTest {
     private UserRepository userRepository;
 
     @Autowired
+    private ContactRepository contactRepository;
+
+    @Autowired
+    private AddressRepository addressRepository;
+
+    @Autowired
     private ObjectMapper objectMapper;
 
     @BeforeEach
     void setUp() {
+        addressRepository.deleteAll();
+        contactRepository.deleteAll();
         userRepository.deleteAll();
     }
 

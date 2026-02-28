@@ -8,6 +8,7 @@ import com.latihan.java.spring.restfulapi.model.ContactResponse;
 import com.latihan.java.spring.restfulapi.model.CreateContactRequest;
 import com.latihan.java.spring.restfulapi.model.UpdateContactRequest;
 import com.latihan.java.spring.restfulapi.model.WebResponse;
+import com.latihan.java.spring.restfulapi.repository.AddressRepository;
 import com.latihan.java.spring.restfulapi.repository.ContactRepository;
 import com.latihan.java.spring.restfulapi.repository.UserRepository;
 import com.latihan.java.spring.restfulapi.security.BCrypt;
@@ -40,10 +41,14 @@ class ContactControllerTest {
     private ContactRepository contactRepository;
 
     @Autowired
+    private AddressRepository addressRepository;
+
+    @Autowired
     private ObjectMapper objectMapper;
 
     @BeforeEach
     void setUp() {
+        addressRepository.deleteAll();
         contactRepository.deleteAll();
         userRepository.deleteAll();
 
