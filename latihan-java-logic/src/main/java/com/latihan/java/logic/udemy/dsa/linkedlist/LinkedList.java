@@ -22,9 +22,9 @@ public class LinkedList {
         length = 1;
     }
 
-    public void append(int value) {
+    public Node append(int value) {
         Node newNode = new Node(value);
-        if (this.length == 0) {
+        if (length == 0) {
             head = newNode;
             tail = newNode;
         } else {
@@ -32,10 +32,20 @@ public class LinkedList {
             tail = newNode;
         }
         length++;
+        return tail;
     }
 
-    public void prepend(int value) {
-
+    public Node prepend(int value) {
+        Node newNode = new Node(value);
+        if(length == 0){
+            head = newNode;
+            tail = newNode;
+        } else {
+            newNode.next = head;
+            head = newNode;
+        }
+        length ++;
+        return head;
     }
 
     public boolean insert(int index, int value) {

@@ -20,24 +20,45 @@ class LinkedListTest {
     @Test
     void printList_Append() {
         LinkedList myLinkedList = new LinkedList(1);
-        myLinkedList.append(2);
+        int expectedValue = 2;
+        int resultValue = myLinkedList.append(expectedValue).value;
+        Assertions.assertEquals(expectedValue, resultValue);
         myLinkedList.printList();
     }
 
     @Test
     void printList_RemoveLast_Only_1() {
-        LinkedList myLinkedList = new LinkedList(1);
-        myLinkedList.removeLast();
+        int expected = 1;
+        LinkedList myLinkedList = new LinkedList(expected);
+        int result = myLinkedList.removeLast().value;
+        Assertions.assertEquals(expected, result);
         myLinkedList.printList();
     }
 
     @Test
     void printList_RemoveLast_ContaintsElement() {
         LinkedList myLinkedList = new LinkedList(1);
+        int expectedValue = 4;
         myLinkedList.append(2);
         myLinkedList.append(3);
-        myLinkedList.append(4);
-        System.out.println("Removed : " + myLinkedList.removeLast().value);
+        myLinkedList.append(expectedValue);
+        int removedValue = myLinkedList.removeLast().value;
+        Assertions.assertEquals(expectedValue, removedValue);
+        System.out.println("Removed : " + removedValue);
         myLinkedList.printList();
     }
+
+    @Test
+    void printList_Prepend() {
+        LinkedList myLinkedList = new LinkedList(2);
+        myLinkedList.append(3);
+        myLinkedList.append(4);
+
+        int expectedValue = 1;
+        int resultValue = myLinkedList.prepend(expectedValue).value;
+        Assertions.assertEquals(expectedValue, resultValue);
+        myLinkedList.printList();
+    }
+
+
 }
