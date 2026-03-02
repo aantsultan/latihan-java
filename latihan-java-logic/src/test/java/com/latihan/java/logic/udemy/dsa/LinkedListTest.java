@@ -164,4 +164,28 @@ class LinkedListTest {
         myLinkedList.printList();
     }
 
+    @Test
+    void findMiddleNode_WithoutLength() {
+        LinkedList myLinkedList = new LinkedList(1);
+        myLinkedList.append(2);
+        myLinkedList.append(3);
+        myLinkedList.append(4);
+        myLinkedList.append(5);
+
+        Assertions.assertEquals(3, myLinkedList.findMiddleNodeWithoutLength().value);
+    }
+
+    @Test
+    void findMiddleNode_WithoutLength_OneElement() {
+        LinkedList myLinkedList = new LinkedList(1);
+        Assertions.assertEquals(1, myLinkedList.findMiddleNodeWithoutLength().value);
+    }
+
+    @Test
+    void findMiddleNode_WithoutLength_TwoElement() {
+        LinkedList myLinkedList = new LinkedList(1);
+        myLinkedList.append(2);
+        Assertions.assertEquals(2, myLinkedList.findMiddleNodeWithoutLength().value);
+    }
+
 }
