@@ -123,6 +123,22 @@ public class LinkedList {
         return temp;
     }
 
+    public void reverse() {
+        Node temp = head;
+        head = tail;
+        tail = temp;
+
+        Node after;
+        Node before = null;
+
+        for (int i = 0; i < length; i++) {
+            after = temp.next;
+            temp.next = before;
+            before = temp;
+            temp = after;
+        }
+    }
+
     public void printList() {
         Node temp = head;
         while (temp != null) {
