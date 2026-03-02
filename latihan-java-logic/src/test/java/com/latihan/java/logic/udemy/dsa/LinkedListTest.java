@@ -127,4 +127,17 @@ class LinkedListTest {
         Assertions.assertNull(myLinkedList.set(3, 3));
     }
 
+    @Test
+    void insert_MiddleRange() {
+        LinkedList myLinkedList = new LinkedList(1);
+        myLinkedList.append(2);
+        myLinkedList.append(3);
+        int indexExpected = 1;
+        int result = myLinkedList.insert(indexExpected, 4).value;
+        int expected = myLinkedList.get(indexExpected).value;
+        Assertions.assertEquals(expected, result);
+
+        myLinkedList.printList();
+    }
+
 }
