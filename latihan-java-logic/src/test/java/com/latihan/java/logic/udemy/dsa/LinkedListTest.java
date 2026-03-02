@@ -207,5 +207,31 @@ class LinkedListTest {
         Assertions.assertFalse(noLoopList.hasLoopWithoutLength());
     }
 
+    @Test
+    void kthFromEnd_WithoutLength(){
+        LinkedList myLinkedList = new LinkedList(1);
+        myLinkedList.append(2);
+        myLinkedList.append(3);
+        myLinkedList.append(4);
+        Assertions.assertEquals(1, myLinkedList.findKthFromEndWithoutLength(4).value);
+    }
+
+    @Test
+    void kthFromEnd_OutOfRange_KbelowZero_WithoutLength(){
+        LinkedList myLinkedList = new LinkedList(1);
+        myLinkedList.append(2);
+        myLinkedList.append(3);
+        myLinkedList.append(4);
+        Assertions.assertNull(myLinkedList.findKthFromEndWithoutLength(0));
+    }
+
+    @Test
+    void kthFromEnd_OutOfRange_KaboveLength_WithoutLength(){
+        LinkedList myLinkedList = new LinkedList(1);
+        myLinkedList.append(2);
+        myLinkedList.append(3);
+        myLinkedList.append(4);
+        Assertions.assertNull(myLinkedList.findKthFromEndWithoutLength(5));
+    }
 
 }

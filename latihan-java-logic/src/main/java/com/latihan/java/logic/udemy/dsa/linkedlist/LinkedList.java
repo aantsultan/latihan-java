@@ -166,6 +166,27 @@ public class LinkedList {
         tail.next = head;
     }
 
+    public Node findKthFromEndWithoutLength(int k) {
+        if (k < 1 || head == null) return null;
+        if (k == 1) return tail;
+
+        Node slow = head;
+        Node fast = head;
+
+        while (k > 0) {
+            if (fast == null) return null;
+            fast = fast.next;
+            k--;
+        }
+
+        while (fast != null) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+
+        return slow;
+    }
+
     public void printList() {
         Node temp = head;
         while (temp != null) {
