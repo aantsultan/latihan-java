@@ -107,5 +107,24 @@ class LinkedListTest {
         Assertions.assertNull(myLinkedList.get(indexMoreThenLength));
     }
 
+    @Test
+    void set_MiddleRange() {
+        int expected = 3;
+        LinkedList myLinkedList = new LinkedList(1);
+        myLinkedList.append(2);
+        myLinkedList.append(22);
+        myLinkedList.append(33);
+        int result = myLinkedList.set(1, expected).value;
+        Assertions.assertEquals(expected, result);
+        myLinkedList.printList();
+    }
+
+    @Test
+    void set_OutOfRange() {
+        LinkedList myLinkedList = new LinkedList(1);
+        myLinkedList.append(2);
+        Assertions.assertNull(myLinkedList.set(-1, 3));
+        Assertions.assertNull(myLinkedList.set(3, 3));
+    }
 
 }
