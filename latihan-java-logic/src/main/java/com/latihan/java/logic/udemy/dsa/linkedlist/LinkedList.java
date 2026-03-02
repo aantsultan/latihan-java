@@ -37,14 +37,14 @@ public class LinkedList {
 
     public Node prepend(int value) {
         Node newNode = new Node(value);
-        if(length == 0){
+        if (length == 0) {
             head = newNode;
             tail = newNode;
         } else {
             newNode.next = head;
             head = newNode;
         }
-        length ++;
+        length++;
         return head;
     }
 
@@ -52,8 +52,8 @@ public class LinkedList {
         return true;
     }
 
-    public Node removeLast(){
-        if(length == 0){
+    public Node removeLast() {
+        if (length == 0) {
             return null;
         }
         Node temp = head;
@@ -64,9 +64,21 @@ public class LinkedList {
         }
         tail = pre;
         tail.next = null;
-        length --;
-        if (length == 0){
+        length--;
+        if (length == 0) {
             head = null;
+            tail = null;
+        }
+        return temp;
+    }
+
+    public Node removeFirst() {
+        if (length == 0) return null;
+        Node temp = head;
+        head = head.next;
+        temp.next = null;
+        length--;
+        if (length == 0) {
             tail = null;
         }
         return temp;

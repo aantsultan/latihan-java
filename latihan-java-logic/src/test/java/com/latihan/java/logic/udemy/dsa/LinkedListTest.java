@@ -60,5 +60,17 @@ class LinkedListTest {
         myLinkedList.printList();
     }
 
+    @Test
+    void printList_RemoveFirst() {
+        int expected = 1;
+        LinkedList myLinkedList = new LinkedList(expected);
+        myLinkedList.append(2);
+        myLinkedList.append(3);
+
+        int result = myLinkedList.removeFirst().value;
+        Assertions.assertEquals(expected, result);
+        myLinkedList.printList();
+    }
+
 
 }
