@@ -72,5 +72,40 @@ class LinkedListTest {
         myLinkedList.printList();
     }
 
+    @Test
+    void get_MiddleIndex() {
+        int expected = 3;
+        int index = 2;
+        LinkedList myLinkedList = new LinkedList(1);
+        myLinkedList.append(2);
+        myLinkedList.append(expected);
+        myLinkedList.append(4);
+
+        int result = myLinkedList.get(index).value;
+        Assertions.assertEquals(expected, result);
+    }
+
+    @Test
+    void get_FirstIndex() {
+        int expected = 1;
+        int index = 0;
+        LinkedList myLinkedList = new LinkedList(expected);
+        myLinkedList.append(2);
+
+        int result = myLinkedList.get(index).value;
+        Assertions.assertEquals(expected, result);
+    }
+
+    @Test
+    void get_OutOfRangeIndex() {
+        int indexBelowZero = -1;
+        int indexMoreThenLength = 3;
+        LinkedList myLinkedList = new LinkedList(1);
+        myLinkedList.append(2);
+
+        Assertions.assertNull(myLinkedList.get(indexBelowZero));
+        Assertions.assertNull(myLinkedList.get(indexMoreThenLength));
+    }
+
 
 }
