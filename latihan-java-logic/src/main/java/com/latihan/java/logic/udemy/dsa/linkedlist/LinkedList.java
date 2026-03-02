@@ -150,6 +150,22 @@ public class LinkedList {
         return slow;
     }
 
+    public boolean hasLoopWithoutLength() {
+        Node slow = head;
+        Node fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next;
+            fast = fast.next;
+            if (slow == fast) return true;
+        }
+        return false;
+    }
+
+    public void createLoop() {
+        tail.next = head;
+    }
+
     public void printList() {
         Node temp = head;
         while (temp != null) {

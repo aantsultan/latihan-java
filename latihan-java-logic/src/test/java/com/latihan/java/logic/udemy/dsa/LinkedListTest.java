@@ -188,4 +188,24 @@ class LinkedListTest {
         Assertions.assertEquals(2, myLinkedList.findMiddleNodeWithoutLength().value);
     }
 
+    @Test
+    void hasLoop_WithoutLength() {
+        LinkedList hasLoopList = new LinkedList(1);
+        hasLoopList.append(2);
+        hasLoopList.append(3);
+        hasLoopList.append(4);
+        hasLoopList.createLoop();
+        Assertions.assertTrue(hasLoopList.hasLoopWithoutLength());
+    }
+
+    @Test
+    void noLoop_WithoutLength() {
+        LinkedList noLoopList = new LinkedList(1);
+        noLoopList.append(2);
+        noLoopList.append(3);
+        noLoopList.append(4);
+        Assertions.assertFalse(noLoopList.hasLoopWithoutLength());
+    }
+
+
 }
