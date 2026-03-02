@@ -140,4 +140,16 @@ class LinkedListTest {
         myLinkedList.printList();
     }
 
+    @Test
+    void remove_MiddleRange() {
+        int expected = 2;
+        LinkedList myLinkedList = new LinkedList(1);
+        myLinkedList.append(expected);
+        myLinkedList.append(3);
+        int result = myLinkedList.remove(1).value;
+        Assertions.assertEquals(expected, result);
+
+        myLinkedList.printList();
+    }
+
 }
