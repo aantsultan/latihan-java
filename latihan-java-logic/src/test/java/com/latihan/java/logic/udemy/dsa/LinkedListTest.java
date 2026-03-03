@@ -208,7 +208,7 @@ class LinkedListTest {
     }
 
     @Test
-    void kthFromEnd_WithoutLength(){
+    void kthFromEnd_WithoutLength() {
         LinkedList myLinkedList = new LinkedList(1);
         myLinkedList.append(2);
         myLinkedList.append(3);
@@ -217,7 +217,7 @@ class LinkedListTest {
     }
 
     @Test
-    void kthFromEnd_OutOfRange_KbelowZero_WithoutLength(){
+    void kthFromEnd_OutOfRange_KbelowZero_WithoutLength() {
         LinkedList myLinkedList = new LinkedList(1);
         myLinkedList.append(2);
         myLinkedList.append(3);
@@ -226,12 +226,34 @@ class LinkedListTest {
     }
 
     @Test
-    void kthFromEnd_OutOfRange_KaboveLength_WithoutLength(){
+    void kthFromEnd_OutOfRange_KaboveLength_WithoutLength() {
         LinkedList myLinkedList = new LinkedList(1);
         myLinkedList.append(2);
         myLinkedList.append(3);
         myLinkedList.append(4);
         Assertions.assertNull(myLinkedList.findKthFromEndWithoutLength(5));
+    }
+
+    @Test
+    void duplicates() {
+        LinkedList myLinkedList = new LinkedList(1);
+        myLinkedList.append(2);
+        myLinkedList.append(3);
+        myLinkedList.append(1);
+        myLinkedList.append(4);
+        myLinkedList.append(2);
+        myLinkedList.append(5);
+        myLinkedList.removeDuplicates();
+        myLinkedList.printList();
+    }
+
+    @Test
+    void duplicates_SameThreeElement() {
+        LinkedList myLinkedList = new LinkedList(5);
+        myLinkedList.append(5);
+        myLinkedList.append(5);
+        myLinkedList.removeDuplicates();
+        myLinkedList.printList();
     }
 
 }

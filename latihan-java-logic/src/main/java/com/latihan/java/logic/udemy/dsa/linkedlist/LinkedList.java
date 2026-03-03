@@ -1,5 +1,8 @@
 package com.latihan.java.logic.udemy.dsa.linkedlist;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class LinkedList {
 
     public class Node {
@@ -185,6 +188,22 @@ public class LinkedList {
         }
 
         return slow;
+    }
+
+    public void removeDuplicates() {
+        Set<Integer> duplicate = new HashSet<>();
+        Node prev = null;
+        Node current = head;
+
+        while (current != null) {
+            if (duplicate.contains(current.value)) {
+                prev.next = current.next;
+            } else {
+                duplicate.add(current.value);
+                prev = current;
+            }
+            current = current.next;
+        }
     }
 
     public void printList() {
