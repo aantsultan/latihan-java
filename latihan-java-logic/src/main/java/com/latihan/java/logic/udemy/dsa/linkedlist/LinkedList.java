@@ -214,6 +214,17 @@ public class LinkedList {
         }
     }
 
+    public int binaryToDecimal(){
+        Node temp = head;
+        int sum = 0;
+        while (temp != null){
+            int value = temp.value;
+            sum = (sum * 2) + value;
+            temp = temp.next;
+        }
+        return sum;
+    }
+
     public int getHead() {
         System.out.println("Head : " + head.value);
         return head.value;

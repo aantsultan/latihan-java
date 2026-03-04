@@ -256,4 +256,22 @@ class LinkedListTest {
         myLinkedList.printList();
     }
 
+    @Test
+    void binaryToDecimal() {
+        LinkedList myLinkedList = new LinkedList(1);
+        myLinkedList.append(1);
+        myLinkedList.append(1);
+        int result = myLinkedList.binaryToDecimal();
+        Assertions.assertEquals(7, result);
+    }
+
+    @Test
+    void binaryToDecimal_includeZero() {
+        LinkedList myLinkedList = new LinkedList(1);
+        myLinkedList.append(0);
+        myLinkedList.append(1);
+        int result = myLinkedList.binaryToDecimal();
+        Assertions.assertEquals(5, result);
+    }
+
 }
