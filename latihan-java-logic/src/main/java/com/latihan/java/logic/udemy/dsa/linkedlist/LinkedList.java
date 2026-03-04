@@ -214,15 +214,39 @@ public class LinkedList {
         }
     }
 
-    public int binaryToDecimal(){
+    public int binaryToDecimal() {
         Node temp = head;
         int sum = 0;
-        while (temp != null){
+        while (temp != null) {
             int value = temp.value;
             sum = (sum * 2) + value;
             temp = temp.next;
         }
         return sum;
+    }
+
+    public void partitionList(int x) {
+        if (head == null) return;
+        Node d1 = new Node(0);
+        Node d2 = new Node(0);
+        Node prev1 = d1;
+        Node prev2 = d2;
+
+        Node temp = head;
+        while (temp != null){
+            if(temp.value < x){
+                prev1.next = temp;
+                prev1 = prev1.next;
+            } else {
+                prev2.next = temp;
+                prev2 = prev2.next;
+            }
+            temp = temp.next;
+        }
+
+        prev2.next = null;
+        prev1.next = d2.next;
+        head = d1.next;
     }
 
     public int getHead() {
