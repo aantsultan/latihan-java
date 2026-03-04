@@ -288,4 +288,17 @@ class LinkedListTest {
         myLinkedList.printList();
     }
 
+    @Test
+    void reverseBetween() {
+        LinkedList myLinkedList = new LinkedList(1);
+        myLinkedList.append(2);
+        myLinkedList.append(3);
+        myLinkedList.append(4);
+        myLinkedList.append(5);
+
+        myLinkedList.reverseBetween(3, 4);
+
+        myLinkedList.printList();
+    }
+
 }

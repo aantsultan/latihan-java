@@ -233,8 +233,8 @@ public class LinkedList {
         Node prev2 = d2;
 
         Node temp = head;
-        while (temp != null){
-            if(temp.value < x){
+        while (temp != null) {
+            if (temp.value < x) {
                 prev1.next = temp;
                 prev1 = prev1.next;
             } else {
@@ -246,6 +246,27 @@ public class LinkedList {
 
         prev2.next = null;
         prev1.next = d2.next;
+        head = d1.next;
+    }
+
+    public void reverseBetween(int m, int n) {
+        if (length <= 1) return;
+
+        Node d1 = new Node(0);
+        d1.next = head;
+        Node prev = d1;
+
+        for (int i = 0; i < m; i++) { // determine prev
+            prev = prev.next;
+        }
+        Node current = prev.next;
+        for (int i = 0; i < n - m; i++) {
+            Node toMove = current.next;
+            current.next = toMove.next;
+            toMove.next = prev.next;
+            prev.next = toMove;
+        }
+
         head = d1.next;
     }
 
