@@ -61,4 +61,30 @@ class DoublyLinkedListTest {
         myDLL.printList();
     }
 
+    @Test
+    void removeFirst() {
+        DoublyLinkedList myDLL = new DoublyLinkedList(1);
+        myDLL.append(2);
+        myDLL.append(3);
+        DoublyLinkedList.Node node = myDLL.removeFirst();
+        Assertions.assertEquals(1, node.value);
+        Assertions.assertNull(node.prev);
+        Assertions.assertNull(node.next);
+
+        myDLL.printList();
+    }
+
+    @Test
+    void removeFirst_OneElement() {
+        DoublyLinkedList myDLL = new DoublyLinkedList(1);
+        DoublyLinkedList.Node node = myDLL.removeFirst();
+        Assertions.assertEquals(1, node.value);
+        Assertions.assertNull(node.prev);
+        Assertions.assertNull(node.next);
+        DoublyLinkedList.Node node1 = myDLL.removeFirst();
+        Assertions.assertNull(node1);
+
+        myDLL.printList();
+    }
+
 }

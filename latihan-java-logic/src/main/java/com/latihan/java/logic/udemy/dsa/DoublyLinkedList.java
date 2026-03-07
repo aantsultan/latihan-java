@@ -54,7 +54,7 @@ public class DoublyLinkedList {
         return temp;
     }
 
-    public Node prepend(int value){
+    public Node prepend(int value) {
         Node newNode = new Node(value);
         if (length == 0) {
             head = newNode;
@@ -64,8 +64,23 @@ public class DoublyLinkedList {
             head.prev = newNode;
             head = newNode;
         }
-        length ++;
+        length++;
         return newNode;
+    }
+
+    public Node removeFirst() {
+        if (length == 0) return null;
+        Node temp = head;
+        if (length == 1) {
+            head = null;
+            tail = null;
+        } else {
+            head = head.next;
+            temp.next = null;
+            head.prev = null;
+        }
+        length--;
+        return temp;
     }
 
     /// End List of Logic
