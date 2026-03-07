@@ -99,6 +99,14 @@ public class DoublyLinkedList {
         return temp;
     }
 
+    public Node set(int index, int value) {
+        Node temp = get(index);
+        if (temp != null) {
+            temp.value = value;
+        }
+        return temp;
+    }
+
     /// End List of Logic
 
     public int getHead() {

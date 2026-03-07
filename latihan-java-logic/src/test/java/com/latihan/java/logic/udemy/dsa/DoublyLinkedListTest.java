@@ -121,4 +121,24 @@ class DoublyLinkedListTest {
         Assertions.assertEquals(9, node.value);
     }
 
+    @Test
+    void set() {
+        DoublyLinkedList myDLL = new DoublyLinkedList(1);
+        myDLL.append(2);
+        myDLL.append(3);
+        DoublyLinkedList.Node set = myDLL.set(1, 10);
+        Assertions.assertEquals(10, set.value);
+        myDLL.printList();
+    }
+
+    @Test
+    void set_OutOfRange() {
+        DoublyLinkedList myDLL = new DoublyLinkedList(1);
+        myDLL.append(2);
+        myDLL.append(3);
+        DoublyLinkedList.Node set = myDLL.set(10, 10);
+        Assertions.assertNull(set);
+        myDLL.printList();
+    }
+
 }
