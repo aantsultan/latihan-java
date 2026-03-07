@@ -87,4 +87,38 @@ class DoublyLinkedListTest {
         myDLL.printList();
     }
 
+    @Test
+    void get() {
+        DoublyLinkedList myDLL = new DoublyLinkedList(1);
+        myDLL.append(2);
+        myDLL.append(3);
+        DoublyLinkedList.Node node = myDLL.get(1);
+        Assertions.assertEquals(2, node.value);
+    }
+
+    @Test
+    void get_OutOfRange() {
+        DoublyLinkedList myDLL = new DoublyLinkedList(1);
+        myDLL.append(2);
+        myDLL.append(3);
+        Assertions.assertNull(myDLL.get(-1));
+        Assertions.assertNull(myDLL.get(3));
+    }
+
+    @Test
+    void get_LargeDataSet() {
+        DoublyLinkedList myDLL = new DoublyLinkedList(1);
+        myDLL.append(2);
+        myDLL.append(3);
+        myDLL.append(4);
+        myDLL.append(5);
+        myDLL.append(6);
+        myDLL.append(7);
+        myDLL.append(8);
+        myDLL.append(9);
+        myDLL.append(10);
+        DoublyLinkedList.Node node = myDLL.get(8);
+        Assertions.assertEquals(9, node.value);
+    }
+
 }
