@@ -213,4 +213,15 @@ class DoublyLinkedListTest {
         myDLL.append(1);
         Assertions.assertFalse(myDLL.isPalindrome());
     }
+
+    @Test
+    void reverse() {
+        DoublyLinkedList myDLL = new DoublyLinkedList(1);
+        myDLL.append(2);
+        myDLL.append(3);
+        myDLL.append(4);
+        myDLL.append(5);
+        myDLL.reverse();
+        myDLL.printList();
+    }
 }

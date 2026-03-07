@@ -143,12 +143,27 @@ public class DoublyLinkedList {
 
         Node forwardNode = head;
         Node backwardNode = tail;
-        for(int i = 0; i < length / 2; i++){
+        for (int i = 0; i < length / 2; i++) {
             if (forwardNode.value != backwardNode.value) return false;
             forwardNode = forwardNode.next;
             backwardNode = backwardNode.prev;
         }
         return true;
+    }
+
+    public void reverse() {
+        if (length <= 1) return;
+        Node temp;
+        Node current = head;
+        while (current != null) {
+            temp = current.prev;
+            current.prev = current.next;
+            current.next = temp;
+            current = current.prev;
+        }
+        temp = head;
+        head = tail;
+        tail = temp;
     }
 
     /// End List of Logic
