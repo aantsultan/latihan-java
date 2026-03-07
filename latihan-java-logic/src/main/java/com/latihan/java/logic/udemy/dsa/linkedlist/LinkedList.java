@@ -270,6 +270,31 @@ public class LinkedList {
         head = d1.next;
     }
 
+    public void swapPairs() {
+        if (head == null) return;
+
+        Node d1 = new Node(0);
+        d1.next = head;
+        Node prev = d1;
+
+        Node first = prev.next;
+        Node second = first.next;
+        if (second == null) return;
+
+        while (first.next != null) {
+            first.next = second.next;
+            second.next = prev.next;
+            prev.next = second;
+
+            prev = first;
+            first = prev.next;
+            if (first == null) break;
+            second = first.next;
+        }
+
+        head = d1.next;
+    }
+
     public int getHead() {
         System.out.println("Head : " + head.value);
         return head.value;
