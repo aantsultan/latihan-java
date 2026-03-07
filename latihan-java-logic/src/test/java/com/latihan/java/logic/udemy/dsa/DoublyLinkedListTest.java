@@ -168,4 +168,29 @@ class DoublyLinkedListTest {
 
         myDLL.printList();
     }
+
+    @Test
+    void remove() {
+        DoublyLinkedList myDLL = new DoublyLinkedList(1);
+        myDLL.append(2);
+        myDLL.append(3);
+
+        DoublyLinkedList.Node remove = myDLL.remove(1);
+        Assertions.assertEquals(2, remove.value);
+        Assertions.assertNull(remove.next);
+        Assertions.assertNull(remove.prev);
+
+        myDLL.printList();
+    }
+
+    @Test
+    void remove_OutOfRange() {
+        DoublyLinkedList myDLL = new DoublyLinkedList(1);
+        myDLL.append(2);
+        myDLL.append(3);
+        Assertions.assertNull(myDLL.remove(-1));
+        Assertions.assertNull(myDLL.remove(100));
+
+        myDLL.printList();
+    }
 }
