@@ -1,4 +1,4 @@
-package com.latihan.java.logic.udemy.dsa.linkedlist;
+package com.latihan.java.logic.udemy.dsa;
 
 import java.util.HashSet;
 import java.util.Set;

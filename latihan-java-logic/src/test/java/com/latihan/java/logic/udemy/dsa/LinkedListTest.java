@@ -1,6 +1,5 @@
 package com.latihan.java.logic.udemy.dsa;
 
-import com.latihan.java.logic.udemy.dsa.linkedlist.LinkedList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
