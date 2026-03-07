@@ -49,4 +49,16 @@ class DoublyLinkedListTest {
 
         myDLL.printList();
     }
+
+    @Test
+    void prepend() {
+        DoublyLinkedList myDLL = new DoublyLinkedList(1);
+        DoublyLinkedList.Node prepend = myDLL.prepend(0);
+        Assertions.assertEquals(0, prepend.value);
+        Assertions.assertNull(prepend.prev);
+        Assertions.assertEquals(1, prepend.next.value);
+
+        myDLL.printList();
+    }
+
 }
