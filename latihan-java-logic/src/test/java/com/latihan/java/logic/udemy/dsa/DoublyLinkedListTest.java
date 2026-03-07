@@ -141,4 +141,31 @@ class DoublyLinkedListTest {
         myDLL.printList();
     }
 
+    @Test
+    void insert() {
+        DoublyLinkedList myDLL = new DoublyLinkedList(1);
+        myDLL.append(2);
+        myDLL.append(3);
+        DoublyLinkedList.Node insertZeroIndex = myDLL.insert(0, 0);
+        Assertions.assertEquals(0, insertZeroIndex.value);
+        DoublyLinkedList.Node insertLengthIndex = myDLL.insert(4, 10);
+        Assertions.assertEquals(10, insertLengthIndex.value);
+        DoublyLinkedList.Node insert = myDLL.insert(2, 7);
+        Assertions.assertEquals(7, insert.value);
+
+        myDLL.printList();
+    }
+
+    @Test
+    void insert_OutOfRange() {
+        DoublyLinkedList myDLL = new DoublyLinkedList(1);
+        myDLL.append(2);
+        myDLL.append(3);
+        DoublyLinkedList.Node insert = myDLL.insert(-1, 0);
+        Assertions.assertNull(insert);
+        DoublyLinkedList.Node insert1 = myDLL.insert(100, 9);
+        Assertions.assertNull(insert1);
+
+        myDLL.printList();
+    }
 }

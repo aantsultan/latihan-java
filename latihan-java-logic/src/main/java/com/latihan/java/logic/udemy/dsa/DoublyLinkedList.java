@@ -107,6 +107,24 @@ public class DoublyLinkedList {
         return temp;
     }
 
+    public Node insert(int index, int value) {
+        if (index < 0 || index > length) return null;
+        if (index == 0) return prepend(value);
+        if (index == length) return append(value);
+        Node newNode = new Node(value);
+        Node before = get(index - 1);
+        Node after = before.next;
+
+        newNode.prev = before;
+        newNode.next = after;
+
+        before.next = newNode;
+        after.prev = newNode;
+
+        length++;
+        return newNode;
+    }
+
     /// End List of Logic
 
     public int getHead() {
