@@ -138,6 +138,19 @@ public class DoublyLinkedList {
         return temp;
     }
 
+    public boolean isPalindrome() {
+        if (length <= 1) return true;
+
+        Node forwardNode = head;
+        Node backwardNode = tail;
+        for(int i = 0; i < length / 2; i++){
+            if (forwardNode.value != backwardNode.value) return false;
+            forwardNode = forwardNode.next;
+            backwardNode = backwardNode.prev;
+        }
+        return true;
+    }
+
     /// End List of Logic
 
     public int getHead() {

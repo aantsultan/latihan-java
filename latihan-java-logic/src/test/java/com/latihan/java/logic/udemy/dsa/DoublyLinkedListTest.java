@@ -193,4 +193,24 @@ class DoublyLinkedListTest {
 
         myDLL.printList();
     }
+
+    @Test
+    void isPalindrome() {
+        DoublyLinkedList myDLL = new DoublyLinkedList(1);
+        myDLL.append(2);
+        myDLL.append(3);
+        myDLL.append(2);
+        myDLL.append(1);
+        Assertions.assertTrue(myDLL.isPalindrome());
+    }
+
+    @Test
+    void isNotPalindrome() {
+        DoublyLinkedList myDLL = new DoublyLinkedList(1);
+        myDLL.append(2);
+        myDLL.append(3);
+        myDLL.append(4);
+        myDLL.append(1);
+        Assertions.assertFalse(myDLL.isPalindrome());
+    }
 }
