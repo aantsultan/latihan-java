@@ -15,4 +15,13 @@ class DoublyLinkedListTest {
         myDLL.printList();
     }
 
+    @Test
+    void append() {
+        DoublyLinkedList myDLL = new DoublyLinkedList(7);
+        DoublyLinkedList.Node appended = myDLL.append(8);
+        Assertions.assertEquals(8, appended.value);
+        Assertions.assertEquals(7, appended.prev.value);
+        Assertions.assertNull(appended.next);
+        myDLL.printList();
+    }
 }

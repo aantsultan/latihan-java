@@ -2,7 +2,7 @@ package com.latihan.java.logic.udemy.dsa;
 
 public class DoublyLinkedList {
 
-    class Node {
+    public class Node {
         int value;
         Node next;
         Node prev;
@@ -16,12 +16,27 @@ public class DoublyLinkedList {
     private Node tail;
     private int length;
 
-    ///
     public DoublyLinkedList(int value) {
         Node newNode = new Node(value);
         head = newNode;
         tail = newNode;
         length = 1;
+    }
+
+    /// List of Logic
+    public Node append(int value) {
+        Node newNode = new Node(value);
+        if (length == 0) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            tail.next = newNode;
+            newNode.prev = tail;
+            tail = newNode;
+        }
+
+        length++;
+        return newNode;
     }
 
     public int getHead() {
