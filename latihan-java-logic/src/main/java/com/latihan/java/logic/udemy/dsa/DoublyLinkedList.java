@@ -23,7 +23,7 @@ public class DoublyLinkedList {
         length = 1;
     }
 
-    /// List of Logic
+    /// Start List of Logic
     public Node append(int value) {
         Node newNode = new Node(value);
         if (length == 0) {
@@ -38,6 +38,23 @@ public class DoublyLinkedList {
         length++;
         return newNode;
     }
+
+    public Node removeLast() {
+        if (length == 0) return null;
+        Node temp = tail;
+        if (length == 1) {
+            head = null;
+            tail = null;
+        } else {
+            tail = tail.prev;
+            tail.next = null;
+            temp.prev = null;
+        }
+        length--;
+        return temp;
+    }
+
+    /// End List of Logic
 
     public int getHead() {
         System.out.println("Head : " + head.value);
