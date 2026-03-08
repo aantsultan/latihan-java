@@ -166,6 +166,37 @@ public class DoublyLinkedList {
         tail = temp;
     }
 
+    public void partitionList(int x) {
+        if (head == null) return;
+
+        Node d1 = new Node(0);
+        Node d2 = new Node(0);
+        Node prev1 = d1;
+        Node prev2 = d2;
+
+        Node temp = head;
+        while (temp != null) {
+            int tempValue = temp.value;
+            if (tempValue < x) {
+                prev1.next = temp;
+                temp.prev = prev1;
+                prev1 = temp;
+            } else {
+                prev2.next = temp;
+                temp.prev = prev2;
+                prev2 = temp;
+            }
+            temp = temp.next;
+        }
+
+        prev2.next = null;
+        prev1.next = d2.next;
+        if (d2.next != null) d2.next.prev = prev1;
+        head = d1.next;
+        if (head != null) head.prev = null;
+
+    }
+
     /// End List of Logic
 
     public int getHead() {

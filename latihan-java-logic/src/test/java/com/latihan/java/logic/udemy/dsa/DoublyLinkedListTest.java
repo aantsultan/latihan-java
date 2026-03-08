@@ -224,4 +224,46 @@ class DoublyLinkedListTest {
         myDLL.reverse();
         myDLL.printList();
     }
+
+    @Test
+    void partitionList() {
+        DoublyLinkedList myDLL = new DoublyLinkedList(3);
+        myDLL.append(8);
+        myDLL.append(5);
+        myDLL.append(10);
+        myDLL.append(2);
+        myDLL.append(1);
+
+        myDLL.partitionList(5);
+
+        myDLL.printList();
+    }
+
+    @Test
+    void partitionList_Edge() {
+        DoublyLinkedList myDLL = new DoublyLinkedList(3);
+        myDLL.append(8);
+        myDLL.append(5);
+        myDLL.append(10);
+        myDLL.append(2);
+        myDLL.append(1);
+
+        myDLL.partitionList(11);
+
+        myDLL.printList();
+    }
+
+    @Test
+    void partitionList_LastZero() {
+        DoublyLinkedList myDLL = new DoublyLinkedList(5);
+        myDLL.append(5);
+        myDLL.append(5);
+        myDLL.append(0);
+        myDLL.append(1);
+        myDLL.append(0);
+
+        myDLL.partitionList(6);
+
+        myDLL.printList();
+    }
 }
