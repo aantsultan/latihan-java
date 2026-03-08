@@ -197,6 +197,34 @@ public class DoublyLinkedList {
 
     }
 
+    public void reverseBetween(int startIndex, int endIndex) {
+        if (head == null || startIndex == endIndex) return;
+
+        Node d1 = new Node(0);
+        d1.next = head;
+        head.prev = d1;
+        Node prev = d1;
+
+        for (int i = 0; i < startIndex; i++) {
+            prev = prev.next;
+        }
+        Node current = prev.next;
+        for (int i = 0; i < endIndex - startIndex; i++) {
+            Node toMove = current.next;
+            current.next = toMove.next;
+            if (toMove.next != null) toMove.next.prev = current;
+
+            toMove.next = prev.next;
+            prev.next.prev = toMove;
+
+            prev.next = toMove;
+            toMove.prev = prev;
+        }
+
+        head = d1.next;
+        if (head != null) head.prev = null;
+    }
+
     /// End List of Logic
 
     public int getHead() {

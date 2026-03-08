@@ -266,4 +266,18 @@ class DoublyLinkedListTest {
 
         myDLL.printList();
     }
+
+    @Test
+    void reverseBetween() {
+        DoublyLinkedList myDLL = new DoublyLinkedList(5);
+        myDLL.append(0);
+        myDLL.append(1);
+        myDLL.append(2);
+        myDLL.append(4);
+        myDLL.append(5);
+        myDLL.append(6);
+
+        myDLL.reverseBetween(1, 4);
+        myDLL.printList();
+    }
 }
