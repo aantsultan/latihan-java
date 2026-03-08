@@ -280,4 +280,29 @@ class DoublyLinkedListTest {
         myDLL.reverseBetween(1, 4);
         myDLL.printList();
     }
+
+    @Test
+    void swapPairs() {
+        DoublyLinkedList myDLL = new DoublyLinkedList(0);
+        myDLL.append(1);
+        myDLL.append(2);
+        myDLL.append(3);
+        myDLL.append(4);
+        myDLL.append(5);
+        myDLL.append(6);
+        myDLL.append(7);
+
+        myDLL.swapPairs();
+
+        myDLL.printList();
+    }
+
+    @Test
+    void swapPairs_SingleElement() {
+        DoublyLinkedList myDLL = new DoublyLinkedList(0);
+
+        myDLL.swapPairs();
+
+        myDLL.printList();
+    }
 }
